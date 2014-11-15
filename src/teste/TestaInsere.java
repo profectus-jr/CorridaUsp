@@ -9,8 +9,8 @@ public class TestaInsere {
 	public static void main(String[] args) throws SQLException{
 		 // pronto para gravar
 		 Corredor corredor = new Corredor();
-		 corredor.setNome("Antonio	Rui");
-		 corredor.setEmail("tojr@ime.usp.br");
+		 corredor.setNome("Antonio Junior");
+		 corredor.setEmail("tocastro@ime.usp.br");
 		 corredor.setSenha("castro");
 		 corredor.setData_nascimento(Calendar.getInstance());
 		 corredor.setAltura(1.95f);

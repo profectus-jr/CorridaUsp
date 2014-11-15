@@ -1,1 +1,6 @@
 /build/
+
+*.class
+
+/src/conexao
+
