@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+		
+	<h:head>
+		<title>Corrida USP - Cadastro Corredor</title>
+	</h:head>
+	
+	<h:body>
+		<h:form>	
+ 			<h:panelGrid id="grid" columns="1">
+ 				<p:outputLabel value="Nome: "/>
+ 				<p:inputText value="#{corredorBean.corredor.nome}"/>
+ 			
+ 				<p:outputLabel value="Senha: "/>
+ 				<p:inputText value="#{corredorBean.corredor.senha}"/>	
+ 				
+ 				<p:outputLabel value="E-mail: "/>
+ 				<p:inputText value="#{corredorBean.corredor.email}"/>
+ 				
+ 				<p:outputLabel value="Data Nascimento: "/>
+ 				<p:calendar value="#{corredorBean.corredor.data_nascimento}"/>
+ 				
+ 				<p:outputLabel value="Peso: "/>
+ 				<p:inputText value="#{corredorBean.corredor.peso}"/>
+ 				
+ 				<p:outputLabel value="Altura: "/>
+ 				<p:inputText value="#{corredorBean.corredor.altura}"/>
+ 				
+ 				<p:outputLabel value="Sexo: "/>
+ 				<p:inputText value="#{corredorBean.corredor.sexo}"/>
+ 							
+				<p:commandButton value="Confirmar" action="#{corredorBean.inscreveCorredor}"/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>

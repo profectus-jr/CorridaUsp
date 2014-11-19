@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +23,7 @@ public class CorredorDao {
 				+ "(nome,senha,email,data_nascimento,peso,altura,sexo,atestado_medico)" + " values (?,?,?,?,?,?,?,?)";
 
 		try {
-			
+
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to projfase2"); 
 			// prepared statement para inserção
@@ -35,7 +34,7 @@ public class CorredorDao {
 			stmt.setString(1, corredor.getNome());
 			stmt.setString(2, corredor.getSenha());
 			stmt.setString(3, corredor.getEmail());
-			stmt.setDate(4, new Date(corredor.getData_nascimento().getTimeInMillis()));
+			stmt.setDate(4, new java.sql.Date(corredor.getData_nascimento().getTime()));
 			stmt.setFloat(5, corredor.getPeso());
 			stmt.setFloat(6, corredor.getAltura());
 			stmt.setString(7, corredor.getSexo()+"");

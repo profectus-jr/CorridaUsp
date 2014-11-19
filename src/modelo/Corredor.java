@@ -1,6 +1,6 @@
 package modelo;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Corredor {
 
@@ -8,7 +8,7 @@ public class Corredor {
 	private String nome;
 	private String senha;
 	private String email;
-	private Calendar data_nascimento;
+	private Date data_nascimento;
 	private float peso;
 	private float altura;
 	private char sexo;
@@ -38,10 +38,10 @@ public class Corredor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Calendar getData_nascimento() {
+	public Date getData_nascimento() {
 		return data_nascimento;
 	}
-	public void setData_nascimento(Calendar data_nascimento) {
+	public void setData_nascimento(Date data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
 	public float getPeso() {
