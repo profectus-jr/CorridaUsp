@@ -40,7 +40,6 @@ public class CorredorDao {
 			stmt.setString(7, corredor.getSexo()+"");
 			stmt.setBoolean(8, corredor.isAtestado_medico());
 			
-
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -51,25 +50,24 @@ public class CorredorDao {
 		}
 	}
 
-	/*public void altera(Contato contato) {
-		String sql = "update contatos set nome=?, email=?, endereco=?,"
-				+ "dataNascimento=? where id=?";
+	/*public void altera(Corredor corredor) {
+		String sql = "update contatos set email=?, senha=?, peso=?, altura=?"
+				+ "where email=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, contato.getNome());
-			stmt.setString(2, contato.getEmail());
-			stmt.setString(3, contato.getEndereco());
-			stmt.setDate(4, new Date(contato.getDataNascimento()
-					.getTimeInMillis()));
-			stmt.setLong(5, contato.getId());
+			stmt.setString(1, corredor.getEmail());
+			stmt.setString(2, corredor.getSenha());
+			stmt.setFloat(3, corredor.getPeso());
+			stmt.setFloat(4, corredor.getAltura());
+			stmt.setString(4, corredor.getEmail());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
+	}*/
 
-	public void remove(Contato contato) {
+	/*public void remove(Contato contato) {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from contatos where id=?");

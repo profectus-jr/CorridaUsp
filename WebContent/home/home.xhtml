@@ -3,16 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core">
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
 		
 	<h:head>
 		<title>Corrida USP</title>
 	</h:head>
 	
 	<h:body>
-		<h:outputLabel value="Homepage "/>
+		<p:outputLabel value="Homepage "/>
 		<h:form>
-			<h:commandButton value="Inscreva-se no corridas USP" action="#{corredorBean.inscreve}"/>
+			<h:panelGrid id="grid" columns="1">
+				<p:commandButton value="Inscreve corredor" action="#{corredorBean.inscreve}"/>
+				<p:commandButton value="Inscreve treinador" action="#{treinadorBean.inscreve}"/>
+			</h:panelGrid>
 		</h:form>
 		
 	</h:body>
