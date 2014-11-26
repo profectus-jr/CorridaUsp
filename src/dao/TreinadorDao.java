@@ -1,10 +1,10 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import modelo.Treinador;
 import conexao.FabricaDeConexao;
 
@@ -43,4 +43,26 @@ public class TreinadorDao {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/*public boolean isTreinador(Treinador treinador) {
+		Treinador trnd = new Treinador();
+		try {
+			PreparedStatement stat = conexao.prepareStatement("SELECT * FROM treinador WHERE email = ?");
+			stat.clearParameters();
+			stat.setString(1, trnd.getEmail());
+			ResultSet resp = stat.executeQuery();
+			while (resp.next()) {
+				trnd.setSenha(resp.getString("senha"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String senhaCripto = new Cryptography().geraMd5(treinador.getSenha());
+		if (trnd != null && trnd.getSenha().equals(senhaCripto)) {
+			return true;
+		}				
+		return false;
+	}	*/
 }

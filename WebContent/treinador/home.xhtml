@@ -11,12 +11,13 @@
 	</h:head>
 	
 	<h:body>
-		<p:outputLabel value="Homepage "/>
+		<p:outputLabel value="Homepage do treinador"/>
 		<h:form>
 			<h:panelGrid id="grid" columns="1">
-				<p:commandButton value="Inscreve corredor" action="#{corredorBean.inscreve}"/>
-				<p:commandButton value="Inscreve treinador" action="#{treinadorBean.inscreve}"/>
+				<p:commandButton value="Cria treino" action="#{treinoBean.inscreve}"/>
+				<p:commandButton value="Sair" action="#{treinadorBean.logout}"/>
 			</h:panelGrid>
 		</h:form>
+		
 	</h:body>
 </html>
