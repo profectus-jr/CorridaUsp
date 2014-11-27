@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 import modelo.Treinador;
 import conexao.Cryptography;
 import conexao.FabricaDeConexao;
@@ -49,21 +53,27 @@ public class TreinadorDao {
 	
 	public boolean isTreinador(Treinador treinador) {
 		Treinador trnd = new Treinador();
+		int id = 0;
 		try {
+			Statement stat1 = conexao.createStatement(); 
+			stat1.execute("set search_path to corridausp");
 			PreparedStatement stat = conexao.prepareStatement("SELECT * FROM treinador WHERE email = ?");
-			stat.clearParameters();
-			stat.setString(1, trnd.getEmail());
+			stat.clearParameters(); 
+			System.out.println("mail: " + treinador.getEmail());
+			stat.setString(1, treinador.getEmail());
 			ResultSet resp = stat.executeQuery();
 			while (resp.next()) {
 				trnd.setSenha(resp.getString("senha"));
+				id = resp.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("AB");
 		String senhaCripto = new Cryptography().geraMd5(treinador.getSenha());
 		if (trnd != null && trnd.getSenha().equals(senhaCripto)) {
+			treinador.setId(id);
 			return true;
 		}				
 		return false;

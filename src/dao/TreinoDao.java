@@ -19,7 +19,7 @@ public class TreinoDao {
 
 		public void adiciona(Treino treino) {
 			String sql = "insert into treino "
-					+ "(descricao,situacao,vaga_maxima,vaga_minima)" + " values (?,?,?,?)";
+					+ "(id_treinador,descricao,situacao,vaga_maxima)" + " values (?,?,?,?)";
 
 			try {
 
@@ -29,10 +29,10 @@ public class TreinoDao {
 				PreparedStatement stmt = conexao.prepareStatement(sql);
 
 				// seta os valores
-				stmt.setString(1, treino.getDescricao());
-				stmt.setString(2, treino.getSituacao());
-				stmt.setInt(3, treino.getVaga_maxima());
-				stmt.setInt(4, treino.getVaga_minima());
+				stmt.setInt(1, treino.getIdTreinador());
+				stmt.setString(2, treino.getDescricao());
+				stmt.setString(3, treino.getSituacao());
+				stmt.setInt(4, treino.getVaga_maxima());
 
 				// executa
 				stmt.execute();

@@ -3,6 +3,7 @@ package modelo;
 public class Treino {
 	
 	private int id;
+	private int idTreinador;
 	private String descricao;
 	private String situacao;
 	private int vaga_maxima;
@@ -37,5 +38,11 @@ public class Treino {
 	}
 	public void setVaga_minima(int vaga_minima) {
 		this.vaga_minima = vaga_minima;
+	}
+	public int getIdTreinador() {
+		return idTreinador;
+	}
+	public void setIdTreinador(int idTreinador) {
+		this.idTreinador = idTreinador;
 	}
 }
