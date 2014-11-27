@@ -8,7 +8,7 @@ create domain TIPO_DECIMAL AS numeric(10,2);
 CREATE TABLE Corredor (
   id SERIAL PRIMARY KEY,  
   nome varchar(100) not null,
-  senha varchar(20) not null,
+  senha varchar(100) not null,
   email varchar(50) not null,
   data_nascimento date not null,
   peso TIPO_DECIMAL CHECK(peso > 0.00),
@@ -30,7 +30,7 @@ ALTER TABLE TelCorredor OWNER TO mac439_grupo1_2014;
 CREATE TABLE Treinador(
   id SERIAL PRIMARY KEY  ,  
   nome varchar(100) not null,
-  senha varchar(20) not null,
+  senha varchar(100) not null,
   email varchar(50) not null,
   curriculo text not null
 );
