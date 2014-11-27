@@ -21,7 +21,7 @@ public class CorredorDao {
 
 	public void adiciona(Corredor corredor) {
 		String sql = "insert into Corredor "
-				+ "(nome,senha,email,data_nascimento,peso,altura,sexo,atestado_medico)" + " values (?,?,?,?,?,?,?,?,?)";
+				+ "(nome,senha,email,data_nascimento,peso,altura,sexo,atestado_medico,num_telefone)" + " values (?,?,?,?,?,?,?,?,?)";
 
 		try {
 
