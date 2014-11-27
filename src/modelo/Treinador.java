@@ -7,6 +7,7 @@ public class Treinador {
 	private String senha;
 	private String email;
 	private String curriculo;
+	private String numTelefone;
 	
 	public int getId() {
 		return id;
@@ -37,5 +38,11 @@ public class Treinador {
 	}
 	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
+	}
+	public String getNumTelefone() {
+		return numTelefone;
+	}
+	public void setNumTelefone(String numTelefone) {
+		this.numTelefone = numTelefone;
 	}
 }

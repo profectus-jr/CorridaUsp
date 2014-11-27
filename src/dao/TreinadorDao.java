@@ -21,7 +21,7 @@ public class TreinadorDao {
 
 	public void adiciona(Treinador treinador) {
 		String sql = "insert into treinador "
-				+ "(nome,senha,email,curriculo)" + " values (?,?,?,?)";
+				+ "(nome,senha,email,curriculo,num_telefone)" + " values (?,?,?,?,?)";
 
 		try {
 
@@ -35,6 +35,7 @@ public class TreinadorDao {
 			stmt.setString(2, treinador.getSenha());
 			stmt.setString(3, treinador.getEmail());
 			stmt.setString(4, treinador.getCurriculo());
+			stmt.setString(5, treinador.getNumTelefone());
 
 			// executa
 			stmt.execute();

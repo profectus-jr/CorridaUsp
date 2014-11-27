@@ -14,36 +14,22 @@ CREATE TABLE Corredor (
   peso TIPO_DECIMAL CHECK(peso > 0.00),
   altura TIPO_DECIMAL CHECK(altura > 0.00),
   sexo char(1) CHECK(sexo = 'M' or sexo = 'F'),
-  atestado_medico boolean DEFAULT FALSE /*sera' uma breve explicacao da situacao medica do corredor*/
+  atestado_medico boolean DEFAULT FALSE /*sera' uma breve explicacao da situacao medica do corredor*/,
+  num_telefone varchar(20)
 );
 
 ALTER TABLE Corredor OWNER TO mac439_grupo1_2014;
-
-CREATE TABLE TelCorredor(
-  id_corredor int references Corredor(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  telefone varchar(20),
-  PRIMARY KEY (id_corredor, telefone)
-);
-
-ALTER TABLE TelCorredor OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE Treinador(
   id SERIAL PRIMARY KEY  ,
   nome varchar(100) not null,
   senha varchar(100) not null,
   email varchar(50) not null,
-  curriculo text not null
+  curriculo text not null,
+  num_telefone varchar(20)
 );
 
 ALTER TABLE Treinador OWNER TO mac439_grupo1_2014;
-
-CREATE TABLE TelTreinador(
-  id_treinador int references Treinador(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  telefone varchar(20),
-  PRIMARY KEY (id_treinador, telefone)
-);
-
-ALTER TABLE TelTreinador OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE Treino (
   id SERIAL PRIMARY KEY,

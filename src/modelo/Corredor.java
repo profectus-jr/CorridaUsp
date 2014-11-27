@@ -13,6 +13,7 @@ public class Corredor {
 	private float altura;
 	private char sexo;
 	private boolean atestado_medico;
+	private String numTelefone;
 	
 	public int getId() {
 		return id;
@@ -67,6 +68,12 @@ public class Corredor {
 	}
 	public void setAtestado_medico(boolean atestado_medico) {
 		this.atestado_medico = atestado_medico;
+	}
+	public String getNumTelefone() {
+		return numTelefone;
+	}
+	public void setNumTelefone(String num_telefone) {
+		this.numTelefone = num_telefone;
 	}
 	
 }
