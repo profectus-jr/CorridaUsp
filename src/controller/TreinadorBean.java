@@ -1,6 +1,10 @@
 package controller;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import modelo.Treinador;
 import conexao.Cryptography;
 import dao.TreinadorDao;
@@ -34,7 +38,8 @@ public class TreinadorBean {
 		return "/home/home?faces-redirect=true";
 	}
 	
-	/*public String autentication() {
+	
+	public String autentication() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		TreinadorDao dao = new TreinadorDao();
 		if (dao.isTreinador(this.treinador)) {
@@ -43,7 +48,7 @@ public class TreinadorBean {
 			session.setAttribute("treinador", this.treinador);
 			return "/treinador/home?faces-redirect=true";
 		} else {
-			FacesMessage fm = new FacesMessage("email e/ou senha inválidos");
+			FacesMessage fm = new FacesMessage("usuário e/ou senha inválidos");
 			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
 			fc.addMessage(null, fm);
 			return "/home/home?faces-redirect=true";
@@ -56,5 +61,5 @@ public class TreinadorBean {
 		HttpSession session = (HttpSession) ec.getSession(false);
 		session.removeAttribute("treinador");
 		return "/home/home?faces-redirect=true";
-	}*/
+	}	
 }

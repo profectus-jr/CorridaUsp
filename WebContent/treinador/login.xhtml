@@ -20,8 +20,8 @@
  				
  				<p:outputLabel value="Senha: "/>
  				<p:inputText value="#{treinadorBean.treinador.senha}"/>
-
-				<p:commandButton value="Confirmar" action="#{treinadorBean.inscrevetreinador}"/>
+ 				
+ 				<p:commandButton update="up" value="Entrar" action="#{treinadorBean.autentication}"/>
 				
 			</h:panelGrid>
 		</h:form>

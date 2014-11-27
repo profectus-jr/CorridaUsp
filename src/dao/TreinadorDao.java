@@ -1,11 +1,13 @@
 package dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import modelo.Treinador;
+import conexao.Cryptography;
 import conexao.FabricaDeConexao;
 
 public class TreinadorDao {
@@ -44,7 +46,7 @@ public class TreinadorDao {
 		}
 	}
 	
-	/*public boolean isTreinador(Treinador treinador) {
+	public boolean isTreinador(Treinador treinador) {
 		Treinador trnd = new Treinador();
 		try {
 			PreparedStatement stat = conexao.prepareStatement("SELECT * FROM treinador WHERE email = ?");
@@ -64,5 +66,5 @@ public class TreinadorDao {
 			return true;
 		}				
 		return false;
-	}	*/
+	}	
 }
