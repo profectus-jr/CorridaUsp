@@ -8,8 +8,8 @@ public class FabricaDeConexao {
 
 	public static final String NOME_DRIVER = "org.postgresql.Driver";
 	public static final String URL_BD = "jdbc:postgresql://data.ime.usp.br:23001/bd_mac439_2014_grupo1";
-	public static final String USUARIO_BD = "u59843";
-	public static final String SENHA_BD = "59843";
+	public static final String USUARIO_BD = "u5984327";
+	public static final String SENHA_BD = "5984327";
 
 	private static FabricaDeConexao fabricaDeConexao = null;
 
