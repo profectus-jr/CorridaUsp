@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+		
+	<h:head>
+		<title>Login Treinador</title>
+	</h:head>
+	
+	<h:body>
+		<p:outputLabel value="Login do treinador"/>
+		<h:form>
+			<h:panelGrid id="grid" columns="1">
+				<p:commandButton value="Cria treino" action="#{treinoBean.inscreve}"/>
+				<p:commandButton value="Sair" action="#{treinadorBean.logout}"/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>
