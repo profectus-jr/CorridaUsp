@@ -24,7 +24,7 @@ public class TreinoDao {
 			try {
 
 				Statement stat1 = conexao.createStatement(); 
-				stat1.execute("set search_path to projfase2"); 
+				stat1.execute("set search_path to corridausp"); 
 				// prepared statement para inserção
 				PreparedStatement stmt = conexao.prepareStatement(sql);
 
