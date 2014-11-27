@@ -39,7 +39,7 @@ public class TreinadorBean {
 	}
 	
 	
-	public String autentication() {
+	public String autenticacao() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		TreinadorDao dao = new TreinadorDao();
 		if (dao.isTreinador(this.treinador)) {
