@@ -1,5 +1,7 @@
-﻿CREATE schema projfase2;
-SET search_path TO projfase2; 
+﻿CREATE schema corridausp;
+SET search_path TO corridausp; 
+
+ALTER SCHEMA corridausp OWNER TO mac439_grupo1_2014;
 
 create domain TIPO_DECIMAL AS numeric(10,2);
 
@@ -15,11 +17,15 @@ CREATE TABLE Corredor (
   atestado_medico boolean DEFAULT FALSE /*sera' uma breve explicacao da situacao medica do corredor*/
 );
 
+ALTER TABLE Corredor OWNER TO mac439_grupo1_2014;
+
 CREATE TABLE TelCorredor(
   id_corredor int references Corredor(id) ON UPDATE CASCADE ON DELETE CASCADE,
   telefone varchar(20),
   PRIMARY KEY (id_corredor, telefone)
 );
+
+ALTER TABLE TelCorredor OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE Treinador(
   id SERIAL PRIMARY KEY  ,  
@@ -29,6 +35,7 @@ CREATE TABLE Treinador(
   curriculo text not null
 );
 
+ALTER TABLE Treinador OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE TelTreinador(
   id_treinador int references Treinador(id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -36,7 +43,7 @@ CREATE TABLE TelTreinador(
   PRIMARY KEY (id_treinador, telefone)
 );
 
-
+ALTER TABLE TelTreinador OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE Treino (
   id SERIAL PRIMARY KEY,
@@ -47,7 +54,7 @@ CREATE TABLE Treino (
   vaga_minima int default 1
 );
 
-
+ALTER TABLE Treino  OWNER TO mac439_grupo1_2014;
 
 /*Relacao inscreve*/
 /*exemplo de utilizacao do campo data: corredores que avaliaram seus professores e possuem data-termino - data < K, onde K
@@ -64,8 +71,9 @@ CREATE TABLE TreinoCorredor(
   PRIMARY KEY (id_treino, id_corredor)
 );
 
-CREATE INDEX data_vencimento ON TreinoCorredor (data_termino);
+ALTER TABLE TreinoCorredor OWNER TO mac439_grupo1_2014;
 
+CREATE INDEX data_vencimento ON TreinoCorredor (data_termino);
 
 CREATE TABLE SessaoTreino(
   id SERIAL PRIMARY KEY,
@@ -74,7 +82,10 @@ CREATE TABLE SessaoTreino(
   data date not null
 );
 
+ALTER TABLE SessaoTreino OWNER TO mac439_grupo1_2014;
+
 CREATE INDEX sessoesTreinos ON SessaoTreino (data);
+
 /*Relacao participa*/
 CREATE TABLE CorredorSessao(
   id_sessao int references SessaoTreino(id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -84,6 +95,8 @@ CREATE TABLE CorredorSessao(
   PRIMARY KEY (id_sessao, id_corredor)
 );
 
+ALTER TABLE CorredorSessao OWNER TO mac439_grupo1_2014;
+
 CREATE TABLE Lesao(
   id SERIAL PRIMARY KEY,
   id_corredor int references Corredor(id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -91,6 +104,7 @@ CREATE TABLE Lesao(
   descricao text
 );
 
+ALTER TABLE Lesao OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE PontoUsp(
   id SERIAL PRIMARY KEY,
@@ -98,6 +112,8 @@ CREATE TABLE PontoUsp(
   rua varchar(100) not null,
   numero varchar(10) not null
 );
+
+ALTER TABLE PontoUsp OWNER TO mac439_grupo1_2014;
 
 CREATE INDEX pontosusp ON PontoUsp(id);
 
@@ -109,8 +125,7 @@ CREATE TABLE Corrida(
   descricao text
 );
 
-
-
+ALTER TABLE Corrida OWNER TO mac439_grupo1_2014;
 
 CREATE INDEX sessoes_corrida ON Corrida (id_sessao);
 
@@ -123,6 +138,7 @@ CREATE TABLE TrechoCorrida(
 
 );
 
+ALTER TABLE TrechoCorrida OWNER TO mac439_grupo1_2014;
 
 /*Relacao avalia*/
 CREATE TABLE TrechoCorredor(
@@ -136,8 +152,9 @@ CREATE TABLE TrechoCorredor(
   comentario varchar(150)
 );
 
-CREATE INDEX avaliacaoPorNota ON TrechoCorredor (nota);
+ALTER TABLE TrechoCorredor OWNER TO mac439_grupo1_2014;
 
+CREATE INDEX avaliacaoPorNota ON TrechoCorredor (nota);
 
 /*um treino tem o numero maximo de vagas em vagas disponiveis no momento de sua criação*/
 CREATE OR REPLACE FUNCTION update_Vagas_disponiveis()
@@ -171,4 +188,3 @@ CREATE TRIGGER Atualiza_vagas_disponiveis
 BEFORE INSERT ON TreinoCorredor
 FOR EACH ROW
 EXECUTE PROCEDURE novas_Vagas_disponiveis();
-
