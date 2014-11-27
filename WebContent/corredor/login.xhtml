@@ -7,7 +7,7 @@
 		xmlns:p="http://primefaces.org/ui">
 		
 	<h:head>
-		<title>Login Treinador</title>
+		<title>Login Corredor</title>
 	</h:head>
 	
 	<h:body>
@@ -16,18 +16,18 @@
 			<h:panelGrid id="grid" columns="1">
 				
 				<p:outputLabel value="E-mail: "/>
- 				<p:inputText value="#{treinadorBean.treinador.email}"/>
+ 				<p:inputText value="#{corredorBean.corredor.email}"/>
  				
  				<p:outputLabel value="Senha: "/>
- 				<p:inputText value="#{treinadorBean.treinador.senha}"/>
+ 				<p:inputText value="#{corredorBean.corredor.senha}"/>
 
-				<p:commandButton value="Confirmar" action="#{treinadorBean.inscrevetreinador}"/>
+				<p:commandButton value="Confirmar" action="#{corredorBean.inscreveCorredor}"/>
 				
 			</h:panelGrid>
 		</h:form>
-		
+
 		<h:form>
-			<p:commandButton value="Inscreve treinador" action="#{treinadorBean.inscreve}"/>
+			<p:commandButton value="Inscreve corredor" action="#{corredorBean.inscreve}"/>
 		</h:form>
 		
 	</h:body>

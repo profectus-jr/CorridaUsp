@@ -22,6 +22,10 @@ public class TreinadorBean {
 		return "/treinador/inscreve?faces-redirect=true";
 	}
 	
+	public String login() {
+		return "/treinador/login?faces-redirect=true";
+	}
+	
 	public String inscreveTreinador() {
 		TreinadorDao dao = new TreinadorDao();
 		this.treinador.setSenha(new Cryptography().geraMd5(this.treinador.getSenha()));

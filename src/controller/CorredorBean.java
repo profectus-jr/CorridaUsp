@@ -23,6 +23,10 @@ public class CorredorBean {
 		return "/corredor/inscreve?faces-redirect=true";
 	}
 	
+	public String login() {
+		return "/corredor/login?faces-redirect=true";
+	}
+	
 	public String inscreveCorredor() {
 		CorredorDao dao = new CorredorDao();
 		this.corredor.setSenha(new Cryptography().geraMd5(this.corredor.getSenha()));

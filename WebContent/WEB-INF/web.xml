@@ -22,5 +22,6 @@
   <filter-mapping>
   	<filter-name>filtro</filter-name>
   	<url-pattern>/treinador/*</url-pattern>
+  	<url-pattern>/corredor/*</url-pattern>
   </filter-mapping>
 </web-app>

@@ -27,7 +27,11 @@ public class Filtro implements Filter{
 		HttpSession session = req.getSession();
 		
 		if (session.getAttribute("treinador") != null
-				|| req.getRequestURI().endsWith("/treinador/inscreve.xhtml")) {
+				|| session.getAttribute("corredor") != null
+				|| req.getRequestURI().endsWith("/treinador/inscreve.xhtml")
+				|| req.getRequestURI().endsWith("/treinador/login.xhtml")
+				|| req.getRequestURI().endsWith("/corredor/inscreve.xhtml")
+				|| req.getRequestURI().endsWith("/corredor/login.xhtml")) {
 			
 			chain.doFilter(request ,response);
 			
