@@ -9,6 +9,7 @@ public class Treino {
 	private int vaga_maxima;
 	private int vaga_minima;
 	
+	
 	public int getId() {
 		return id;
 	}

@@ -39,7 +39,6 @@ public class TreinoBean {
 		System.out.println("id treinador:" + treinador.getId());
 		this.treino.setIdTreinador(treinador.getId());
 		dao.adiciona(this.treino);
-		
 		this.treino = new Treino();
 		return "/home/home?faces-redirect=true";
 	}

@@ -1,7 +1,10 @@
 package controller;
 
-import javax.faces.bean.ManagedBean;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -14,6 +17,16 @@ import dao.TreinadorDao;
 public class TreinadorBean {
 	
 	private Treinador treinador =  new Treinador();
+	
+	private static ArrayList<String> treinos;
+	
+	public void add(String s){
+		treinos.add(s);
+	}
+	
+	public List<String> getTreinos(){
+		return treinos;
+	}
 
 	public Treinador getTreinador() {
 		return treinador;
@@ -49,7 +62,8 @@ public class TreinadorBean {
 			HttpSession session = (HttpSession) ec.getSession(false);
 			session.setAttribute("treinador", this.treinador);
 			Treinador treinador = (Treinador)session.getAttribute("treinador");
-			System.out.println("id treinador s:" + treinador.getEmail());
+			System.out.println("id treinador s:" + treinador.getId());
+			treinos = dao.listaTreinosTreinador(treinador);
 			return "/treinador/home?faces-redirect=true";
 		} else {
 			System.out.println("False");

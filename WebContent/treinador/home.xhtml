@@ -16,8 +16,14 @@
 			<h:panelGrid id="grid" columns="1">
 				<p:commandButton value="Cria treino" action="#{treinoBean.inscreve}"/>
 				<p:commandButton value="Sair" action="#{treinadorBean.logout}"/>
+				
 			</h:panelGrid>
 		</h:form>
-		
+		<p:dataTable var="car" value="#{treinadorBean.treinos}">
+    <p:column headerText="Id">
+        <h:outputText value="#{car.descricao}" />
+    </p:column>
+</p:dataTable>
+				
 	</h:body>
 </html>

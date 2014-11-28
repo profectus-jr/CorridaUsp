@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Treinador;
 import conexao.Cryptography;
 import conexao.FabricaDeConexao;
+import controller.TreinadorBean;
 
 public class TreinadorDao {
 
@@ -23,6 +26,28 @@ public class TreinadorDao {
 		this.conexao = FabricaDeConexao.obterInstancia().obterConexao();
 	}
 
+	public ArrayList<String> listaTreinosTreinador(Treinador treinador){
+		ArrayList<String> trnd = new ArrayList<String>();
+		try {
+			Statement stat1 = conexao.createStatement(); 
+			stat1.execute("set search_path to corridausp");
+			PreparedStatement stat = conexao.prepareStatement("SELECT descricao FROM treino WHERE id_treinador = ?");
+			stat.clearParameters(); 
+			
+			stat.setInt(1, treinador.getId());
+			ResultSet resp = stat.executeQuery();
+			while (resp.next()) {
+				System.out.println("OO");
+				trnd.add(resp.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return trnd;
+	}
+	
 	public void adiciona(Treinador treinador) {
 		String sql = "insert into treinador "
 				+ "(nome,senha,email,curriculo,num_telefone)" + " values (?,?,?,?,?)";
