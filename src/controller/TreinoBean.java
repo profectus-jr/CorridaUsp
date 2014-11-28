@@ -40,7 +40,7 @@ public class TreinoBean {
 		this.treino.setIdTreinador(treinador.getId());
 		dao.adiciona(this.treino);
 		this.treino = new Treino();
-		return "/home/home?faces-redirect=true";
+		return "/treinador/home?faces-redirect=true";
 	}
 
 //	public String getSituacao() {

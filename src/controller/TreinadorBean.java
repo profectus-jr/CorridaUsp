@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import modelo.Treinador;
+import modelo.Treino;
 import conexao.Cryptography;
 import dao.TreinadorDao;
 
@@ -18,15 +19,16 @@ public class TreinadorBean {
 	
 	private Treinador treinador =  new Treinador();
 	
-	private static ArrayList<String> treinos;
+	/*
+	private static ArrayList<Treino> treinos;
 	
-	public void add(String s){
+	public void add(Treino s){
 		treinos.add(s);
 	}
 	
-	public List<String> getTreinos(){
+	public List<Treino> getTreinos(){
 		return treinos;
-	}
+	}*/
 
 	public Treinador getTreinador() {
 		return treinador;
@@ -44,6 +46,15 @@ public class TreinadorBean {
 		return "/treinador/login?faces-redirect=true";
 	}
 	
+	public List<Treino> getListaTreinos(){
+		TreinadorDao dao = new TreinadorDao();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		treinador = (Treinador)session.getAttribute("treinador");
+		return dao.listaTreinosTreinador(treinador);
+	}
+	
 	public String inscreveTreinador() {
 		TreinadorDao dao = new TreinadorDao();
 		this.treinador.setSenha(new Cryptography().geraMd5(this.treinador.getSenha()));
@@ -51,22 +62,17 @@ public class TreinadorBean {
 		this.treinador = new Treinador();
 		return "/home/home?faces-redirect=true";
 	}
-	
-	
+		
 	public String autenticacao() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		TreinadorDao dao = new TreinadorDao();
 		if (dao.isTreinador(this.treinador)) {
-			System.out.println("OK");
 			ExternalContext ec = fc.getExternalContext();
 			HttpSession session = (HttpSession) ec.getSession(false);
 			session.setAttribute("treinador", this.treinador);
-			Treinador treinador = (Treinador)session.getAttribute("treinador");
-			System.out.println("id treinador s:" + treinador.getId());
-			treinos = dao.listaTreinosTreinador(treinador);
+			treinador = (Treinador)session.getAttribute("treinador");
 			return "/treinador/home?faces-redirect=true";
 		} else {
-			System.out.println("False");
 			FacesMessage fm = new FacesMessage("usuário e/ou senha inválidos");
 			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
 			fc.addMessage(null, fm);

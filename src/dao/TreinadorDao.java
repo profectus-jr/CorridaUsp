@@ -6,16 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import modelo.Treinador;
+import modelo.Treino;
 import conexao.Cryptography;
 import conexao.FabricaDeConexao;
-import controller.TreinadorBean;
 
 public class TreinadorDao {
 
@@ -26,8 +21,8 @@ public class TreinadorDao {
 		this.conexao = FabricaDeConexao.obterInstancia().obterConexao();
 	}
 
-	public ArrayList<String> listaTreinosTreinador(Treinador treinador){
-		ArrayList<String> trnd = new ArrayList<String>();
+	public ArrayList<Treino> listaTreinosTreinador(Treinador treinador){
+		ArrayList<Treino> treinos = new ArrayList<Treino>();
 		try {
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to corridausp");
@@ -37,15 +32,16 @@ public class TreinadorDao {
 			stat.setInt(1, treinador.getId());
 			ResultSet resp = stat.executeQuery();
 			while (resp.next()) {
-				System.out.println("OO");
-				trnd.add(resp.getString(1));
+				Treino treino = new Treino();
+				treino.setDescricao(resp.getString(1));
+				treinos.add(treino);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return trnd;
+		return treinos;
 	}
 	
 	public void adiciona(Treinador treinador) {

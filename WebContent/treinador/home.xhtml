@@ -19,9 +19,10 @@
 				
 			</h:panelGrid>
 		</h:form>
-		<p:dataTable var="car" value="#{treinadorBean.treinos}">
-    <p:column headerText="Id">
-        <h:outputText value="#{car.descricao}" />
+		<p:dataTable var="treino" value="#{treinadorBean.listaTreinos}">
+    <p:column headerText="Descricao">
+        <h:outputText value="#{treino.descricao}" />
+        <a href="home.xhtml"> Sair </a>
     </p:column>
 </p:dataTable>
 				
