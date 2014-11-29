@@ -11,12 +11,19 @@
 </h:head>
 
 <h:body>
-	<p:outputLabel value="Homepage do treinador" />
-	<p:dataTable var="treino" value="#{treinadorBean.treino}">
+	<p:outputLabel value="Vizualização das Sessões de treino" />
+
+	<h:form>
+		<h:panelGrid id="grid" columns="1">
+			<p:commandButton value="Cria Sessão" action="#{treinadorBean.inscreveTreino}" />
+			<p:commandButton value="Voltar ao menu de treinos" action="#{treinadorBean.retornarAoMenuTreinador}" />
+
+		</h:panelGrid>
+	</h:form>
+	<p:dataTable var="treino" value="#{treinadorBean.sessoesTreino}">
 		<p:column headerText="Descricao">
-			<h:outputText value="#{treino.descricao}" />
-			<p:commandButton value="Sair"
-				action="#{treinadorBean.editar(treino)}" />
+			<h:outputText value="#{treino.data}" />
+
 		</p:column>
 	</p:dataTable>
 </h:body>

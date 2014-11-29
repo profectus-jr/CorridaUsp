@@ -26,14 +26,16 @@ public class TreinadorDao {
 		try {
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to corridausp");
-			PreparedStatement stat = conexao.prepareStatement("SELECT descricao FROM treino WHERE id_treinador = ?");
+			PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao FROM treino WHERE id_treinador = ?");
 			stat.clearParameters(); 
 			
 			stat.setInt(1, treinador.getId());
 			ResultSet resp = stat.executeQuery();
 			while (resp.next()) {
 				Treino treino = new Treino();
-				treino.setDescricao(resp.getString(1));
+				treino.setId(resp.getInt(1));
+
+				treino.setDescricao(resp.getString(2));
 				treinos.add(treino);
 			}
 		} catch (SQLException e) {
