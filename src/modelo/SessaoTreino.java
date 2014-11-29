@@ -5,6 +5,7 @@ import java.util.Date;
 public class SessaoTreino {
 	
 	private int id;
+	private int idTreino;
 	private Date hora;
 	private Date data;
 	
@@ -25,5 +26,11 @@ public class SessaoTreino {
 	}
 	public void setData(Date data) {
 		this.data = data;
+	}
+	public int getIdTreino() {
+		return idTreino;
+	}
+	public void setIdTreino(int idTreino) {
+		this.idTreino = idTreino;
 	}
 }

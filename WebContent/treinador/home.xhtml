@@ -22,7 +22,7 @@
 		<p:dataTable var="treino" value="#{treinadorBean.listaTreinos}">
     <p:column headerText="Descricao">
         <h:outputText value="#{treino.descricao}" />
-        <a href="home.xhtml"> Sair </a>
+        <p:commandButton value="Sair" action="#{treinadorBean.visualizarSessao(treino)}"/>
     </p:column>
 </p:dataTable>
 				

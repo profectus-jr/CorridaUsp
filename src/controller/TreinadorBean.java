@@ -18,18 +18,8 @@ import dao.TreinadorDao;
 public class TreinadorBean {
 	
 	private Treinador treinador =  new Treinador();
+	private Treino treino;
 	
-	/*
-	private static ArrayList<Treino> treinos;
-	
-	public void add(Treino s){
-		treinos.add(s);
-	}
-	
-	public List<Treino> getTreinos(){
-		return treinos;
-	}*/
-
 	public Treinador getTreinador() {
 		return treinador;
 	}
@@ -86,5 +76,19 @@ public class TreinadorBean {
 		HttpSession session = (HttpSession) ec.getSession(false);
 		session.removeAttribute("treinador");
 		return "/home/home?faces-redirect=true";
-	}	
+	}
+	
+	public String visualizarSessao(Treino treino) {
+		this.setTreino(treino);
+		System.out.println("treino desc: " + treino.getDescricao());
+		return "/treinador/visualizarSessaoTreino?faces-redirect=true";
+	}
+
+	public Treino getTreino() {
+		return treino;
+	}
+
+	public void setTreino(Treino treino) {
+		this.treino = treino;
+	}
 }

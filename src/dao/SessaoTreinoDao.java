@@ -1,30 +1,35 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import modelo.Treinador;
+import conexao.FabricaDeConexao;
+import modelo.SessaoTreino;
 
 public class SessaoTreinoDao {
-	/*
-	public void adiciona(Treino treino) {
+	
+	private Connection conexao;
+
+	public SessaoTreinoDao() {
+		this.conexao = FabricaDeConexao.obterInstancia().obterConexao();
+	}
+	
+	public void adiciona(SessaoTreino sessaotreino) {
 		String sql = "insert into sessaotreino "
-				+ "(hora,data)" + " values (?,?)";
+				+ "(id_treino,hora,data)" + " values (?,?,?)";
 
 		try {
-
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to corridausp"); 
-			// prepared statement para inserção
+			
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 
 			// seta os valores
-			stmt.setString(1, treinador.getNome());
-			stmt.setString(2, treinador.getSenha());
-			stmt.setString(3, treinador.getEmail());
-			stmt.setString(4, treinador.getCurriculo());
-			stmt.setString(5, treinador.getNumTelefone());
+			stmt.setInt(1, sessaotreino.getIdTreino());
+			stmt.setString(2, sessaotreino.getHora().toString());
+			stmt.setString(3, sessaotreino.getData().toString());
 
 			// executa
 			stmt.execute();
@@ -35,5 +40,4 @@ public class SessaoTreinoDao {
 			throw new RuntimeException(e);
 		}
 	}
-	*/
 }
