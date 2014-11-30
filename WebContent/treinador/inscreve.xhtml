@@ -11,8 +11,9 @@
 	</h:head>
 	
 	<h:body>
+		<p:outputLabel value="Inscrição do treinador"/>
 		<h:form>	
- 			<h:panelGrid id="grid" columns="1">
+ 			<h:panelGrid id="grid" columns="1" style="table-layout:fixed; font-size:12px; margin-top:40px;">
  				<p:outputLabel value="Nome: "/>
  				<p:inputText value="#{treinadorBean.treinador.nome}"/>
  			
