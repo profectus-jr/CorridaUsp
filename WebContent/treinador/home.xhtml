@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:p="http://primefaces.org/ui">
-		
-	<h:head>
-		<title>Corrida USP</title>
-	</h:head>
-	
-	<h:body>
-		<p:outputLabel value="Homepage do treinador"/>
-		<h:form>
-			<h:panelGrid id="grid" columns="1">
-				<p:commandButton value="Cria treino" action="#{treinoBean.inscreve}"/>
-				<p:commandButton value="Sair" action="#{treinadorBean.logout}"/>
-				
-			</h:panelGrid>
-		</h:form>
-		<p:dataTable var="treino" value="#{treinadorBean.listaTreinos}">
-    <p:column headerText="Descricao">
-        <h:outputText value="#{treino.descricao}" />
-        <p:commandButton value="vizualizar" action="#{treinadorBean.visualizarSessao(treino)}"/>
-    </p:column>
-</p:dataTable>
-				
-	</h:body>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Corrida USP</title>
+</h:head>
+
+<h:body>
+	<p:outputLabel value="Homepage do treinador" />
+	<h:form>
+		<h:panelGrid id="grid" columns="1">
+			<p:commandButton value="Cria treino" action="#{treinoBean.inscreve}" />
+			<p:commandButton value="Sair" action="#{treinadorBean.logout}" />
+
+		</h:panelGrid>
+	</h:form>
+	<p:dataTable var="treino" value="#{treinadorBean.listaTreinos}">
+		<p:column headerText="Id">
+			<h:outputText value="#{treino.id}" />
+		</p:column>
+		<p:column headerText="Descrição">
+			<h:outputText value="#{treino.descricao}" />
+		</p:column>
+		<p:column headerText="Situação">
+			<h:outputText value="#{treino.situacao}" />
+		</p:column>
+		<p:column headerText="Data do inicio">
+			<h:outputText value="#{treino.dataInicio}" />
+		</p:column>
+		<p:column headerText="Data do fim">
+			<h:outputText value="#{treino.dataFim}" />
+		</p:column>
+		<p:column headerText="Vagas">
+			<h:outputText value="#{treino.vagas}" />
+		</p:column>
+		<p:column >
+			<p:commandButton value="vizualizar"
+				action="#{treinadorBean.visualizarSessao(treino)}" />
+		</p:column>
+	</p:dataTable>
+
+</h:body>
 </html>

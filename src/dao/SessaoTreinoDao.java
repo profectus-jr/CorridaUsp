@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
-import conexao.FabricaDeConexao;
 import modelo.SessaoTreino;
-import modelo.Treinador;
 import modelo.Treino;
+import conexao.FabricaDeConexao;
 
 public class SessaoTreinoDao {
 	
@@ -20,21 +20,25 @@ public class SessaoTreinoDao {
 		this.conexao = FabricaDeConexao.obterInstancia().obterConexao();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void adiciona(SessaoTreino sessaotreino) {
 		String sql = "insert into sessaotreino "
-				+ "(id_treino,hora,data)" + " values (?,?,?)";
+				+ "(id_treino,dia_semana,hora,duracao)" + " values (?,?,?,?)";
 
 		try {
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to corridausp"); 
 			
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-
+			
+			System.out.println("hora: " + sessaotreino.getHora());
+						
 			// seta os valores
 			stmt.setInt(1, sessaotreino.getIdTreino());
-			stmt.setString(2, sessaotreino.getHora().toString());
-			stmt.setString(3, sessaotreino.getData().toString());
-
+			stmt.setString(2, sessaotreino.getDiaSemana());
+			stmt.setTimestamp(3, new java.sql.Timestamp(sessaotreino.getHora().getTime()));
+			stmt.setFloat(4, sessaotreino.getDuracao());
+			
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -45,29 +49,30 @@ public class SessaoTreinoDao {
 		}
 	}
 	
-	
+	@SuppressWarnings("deprecation")
 	public ArrayList<SessaoTreino> listaSessoesDoTreino(Treino treino){
 		ArrayList<SessaoTreino> streinos = new ArrayList<SessaoTreino>();
 		try {
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to corridausp");
-			PreparedStatement stat = conexao.prepareStatement("SELECT hora,data FROM sessaotreino WHERE id_treino = ?");
+			PreparedStatement stat = conexao.prepareStatement("SELECT id,dia_semana,hora,duracao FROM sessaotreino WHERE id_treino = ?");
 			stat.clearParameters(); 
-			
 			stat.setInt(1, treino.getId());
 			ResultSet resp = stat.executeQuery();
 			while (resp.next()) {
 				SessaoTreino sessaotreino = new SessaoTreino();
-				sessaotreino.setHora(resp.getDate(1));
-				sessaotreino.setData(resp.getDate(2));
-
+				sessaotreino.setId(resp.getInt(1));
+				sessaotreino.setDiaSemana(resp.getString(2));
+				System.out.println("2 hora:" + resp.getTime(3));
+				System.out.println("21 hora:" + (new Date(resp.getTime(3).getTime())));
+				sessaotreino.setHora(new Date(resp.getTime(3).getTime()));
+				sessaotreino.setDuracao(resp.getFloat(4));
 				streinos.add(sessaotreino);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return streinos;
 	}
 }

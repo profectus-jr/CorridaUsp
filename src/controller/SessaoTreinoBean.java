@@ -6,31 +6,57 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import modelo.SessaoTreino;
-import modelo.Treinador;
 import modelo.Treino;
-import dao.TreinoDao;
+import dao.SessaoTreinoDao;
 
 @ManagedBean
 public class SessaoTreinoBean {
 	
-	public String inscreveTreino() {
-		/*FacesContext fc = FacesContext.getCurrentInstance();
-		TreinoDao dao = new TreinoDao();
+	private SessaoTreino sessaoTreino;
+	
+	private String diasSemana[] = {"segunda","terca","quarta", "quinta", "sexta", "sabado", "domingo"};
+	
+	public SessaoTreinoBean(){
+		this.sessaoTreino = new SessaoTreino();
+		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 		HttpSession session = (HttpSession) ec.getSession(false);
-		String sessionId = session.getId();
-		System.out.println("s id:" + sessionId);
-		Treinador treinador = (Treinador)session.getAttribute("treinador");
-		System.out.println("id treinador:" + treinador.getId());
-		this.treino.setIdTreinador(treinador.getId());
-		dao.adiciona(this.treino);
-		this.treino = new Treino();*/
-		return "/treinador/visualizarSessaoTreinohome?faces-redirect=true";
+		Treino treino = (Treino)session.getAttribute("treino");
+		this.sessaoTreino.setIdTreino(treino.getId());
+	}
+	
+	public String novaSessaoTreino(){
+		SessaoTreinoDao sessaoTreinoDao = new SessaoTreinoDao();
+		sessaoTreinoDao.adiciona(this.sessaoTreino);
+		return "/SessaoTreino/home?faces-redirect=true";
+	}
+	
+	public String novaSessaoTreinoPagina(){
+		return "/SessaoTreino/novaSessao?faces-redirect=true";
+	}
+	
+	public String retornarAHomeSessaoTreino(){
+		return "/SessaoTreino/home?faces-redirect=true";
 	}
 
 	public String retornarAoMenuTreinador(){
 		return "/treinador/home?faces-redirect=true";
 	}
-	
 
+	public SessaoTreino getSessaoTreino() {
+		return sessaoTreino;
+	}
+
+	public void setSessaoDeTreino(SessaoTreino sessaoTreino) {
+		this.sessaoTreino = sessaoTreino;
+	}
+
+	public String[] getDiasSemana() {
+		return diasSemana;
+	}
+
+	public void setDiasSemana(String diasSemana[]) {
+		this.diasSemana = diasSemana;
+	}
+	
 }

@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -15,6 +14,7 @@ import modelo.Treino;
 import conexao.Cryptography;
 import dao.SessaoTreinoDao;
 import dao.TreinadorDao;
+import dao.TreinoDao;
 
 @ManagedBean
 public class TreinadorBean {
@@ -39,12 +39,12 @@ public class TreinadorBean {
 	}
 	
 	public List<Treino> getListaTreinos(){
-		TreinadorDao dao = new TreinadorDao();
+		TreinoDao dao = new TreinoDao();
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 		HttpSession session = (HttpSession) ec.getSession(false);
 		treinador = (Treinador)session.getAttribute("treinador");
-		return dao.listaTreinosTreinador(treinador);
+		return dao.listaTreinosPorTreinador(treinador);
 	}
 	
 	public List<SessaoTreino> getSessoesTreino(){
@@ -54,7 +54,6 @@ public class TreinadorBean {
 		HttpSession session = (HttpSession) ec.getSession(false);
 		treino = (Treino)session.getAttribute("treino");
 		System.out.println("esse eh o id:" + treino.getId()+ "esse eh o id treinador:");
-		
 		return dao.listaSessoesDoTreino(treino);
 	}
 	
@@ -125,7 +124,10 @@ public class TreinadorBean {
 		System.out.println("sessao recebida");
 
 		session.setAttribute("treino", treino);
-		return "/treinador/visualizarSessaoTreino?faces-redirect=true";
+		
+		//return "/treinador/visualizarSessaoTreino?faces-redirect=true";
+		return "/SessaoTreino/home?faces-redirect=true";
+
 	}
 
 	public Treino getTreino() {

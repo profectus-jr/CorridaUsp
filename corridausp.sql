@@ -3,7 +3,9 @@ SET search_path TO corridausp;
 
 ALTER SCHEMA corridausp OWNER TO mac439_grupo1_2014;
 
-create domain TIPO_DECIMAL AS numeric(10,2);
+create DOMAIN TIPO_DECIMAL AS numeric(10,2);
+
+CREATE DOMAIN DIASEMANA VARCHAR(10) CHECK (VALUE IN ('segunda','terca','quarta','quinta','sexta','sabado','domingo'));
 
 CREATE TABLE Corredor (
   id SERIAL PRIMARY KEY,
@@ -34,10 +36,11 @@ ALTER TABLE Treinador OWNER TO mac439_grupo1_2014;
 CREATE TABLE Treino (
   id SERIAL PRIMARY KEY,
   id_treinador int references Treinador(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  descricao varchar(150) not null,
-  situacao varchar (20) not null,
-  vaga_maxima int not null,
-  vaga_minima int default 1
+  descricao VARCHAR(150) NOT NULL,
+  situacao VARCHAR(20) NOT NULL,
+  vagas INT NOT NULL,
+  data_inicio DATE,
+  data_fim DATE
 );
 
 ALTER TABLE Treino  OWNER TO mac439_grupo1_2014;
@@ -64,13 +67,12 @@ CREATE INDEX data_vencimento ON TreinoCorredor (data_termino);
 CREATE TABLE SessaoTreino(
   id SERIAL PRIMARY KEY,
   id_treino int references Treino(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  dia_semana DIASEMANA not null,
   hora time not null,
-  data date not null
+  duracao TIPO_DECIMAL CHECK(duracao > 0.00)
 );
 
 ALTER TABLE SessaoTreino OWNER TO mac439_grupo1_2014;
-
-CREATE INDEX sessoesTreinos ON SessaoTreino (data);
 
 /*Relacao participa*/
 CREATE TABLE CorredorSessao(
@@ -142,7 +144,8 @@ ALTER TABLE TrechoCorredor OWNER TO mac439_grupo1_2014;
 
 CREATE INDEX avaliacaoPorNota ON TrechoCorredor (nota);
 
-/*um treino tem o numero maximo de vagas em vagas disponiveis no momento de sua criação*/
+/*
+--um treino tem o numero maximo de vagas em vagas disponiveis no momento de sua criação
 CREATE OR REPLACE FUNCTION update_Vagas_disponiveis()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -157,7 +160,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE update_Vagas_disponiveis();
 
 
-/*garante que um treino nao tera mais alunos do que o numero de vagas*/
+--garante que um treino nao tera mais alunos do que o numero de vagas
 CREATE OR REPLACE FUNCTION novas_Vagas_disponiveis()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -174,3 +177,4 @@ CREATE TRIGGER Atualiza_vagas_disponiveis
 BEFORE INSERT ON TreinoCorredor
 FOR EACH ROW
 EXECUTE PROCEDURE novas_Vagas_disponiveis();
+*/

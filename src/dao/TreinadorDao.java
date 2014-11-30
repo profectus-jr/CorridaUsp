@@ -5,10 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import modelo.Treinador;
-import modelo.Treino;
 import conexao.Cryptography;
 import conexao.FabricaDeConexao;
 
@@ -20,31 +18,33 @@ public class TreinadorDao {
 	public TreinadorDao() {
 		this.conexao = FabricaDeConexao.obterInstancia().obterConexao();
 	}
-
-	public ArrayList<Treino> listaTreinosTreinador(Treinador treinador){
+	/*
+	public ArrayList<Treino> listaTreinosPorTreinador(Treinador treinador){
 		ArrayList<Treino> treinos = new ArrayList<Treino>();
 		try {
 			Statement stat1 = conexao.createStatement(); 
 			stat1.execute("set search_path to corridausp");
-			PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao FROM treino WHERE id_treinador = ?");
+			PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas FROM treino WHERE id_treinador = ?");
 			stat.clearParameters(); 
-			
 			stat.setInt(1, treinador.getId());
 			ResultSet resp = stat.executeQuery();
 			while (resp.next()) {
 				Treino treino = new Treino();
 				treino.setId(resp.getInt(1));
-
 				treino.setDescricao(resp.getString(2));
+				treino.setSituacao(resp.getString(3));
+				treino.setDataInicio(resp.getDate(4));
+				treino.setDataFim(resp.getDate(5));
+				treino.setVagas(resp.getInt(6));
 				treinos.add(treino);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return treinos;
 	}
+	*/
 	
 	public void adiciona(Treinador treinador) {
 		String sql = "insert into treinador "

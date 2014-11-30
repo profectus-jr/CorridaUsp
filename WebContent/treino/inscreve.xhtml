@@ -24,8 +24,14 @@
 				<f:selectItems value="#{treinoBean.situacoes}" />
 			</p:selectOneMenu>
 
-			<p:outputLabel value="Vagas disponiveis: " />
-			<p:inputText value="#{treinoBean.treino.vaga_maxima}" />
+			<p:outputLabel value="Vagas: " />
+			<p:inputText value="#{treinoBean.treino.vagas}" />
+			
+			<p:outputLabel value="Data de início: "/>
+ 			<p:calendar value="#{treinoBean.treino.dataInicio}"/>
+ 				
+ 			<p:outputLabel value="Data de fim: "/>
+ 			<p:calendar value="#{treinoBean.treino.dataFim}"/>
 
 			<p:commandButton value="Confirmar"
 				action="#{treinoBean.inscreveTreino}" />

@@ -1,14 +1,16 @@
 package modelo;
 
+import java.util.Date;
+
 public class Treino {
 	
 	private int id;
 	private int idTreinador;
 	private String descricao;
 	private String situacao;
-	private int vaga_maxima;
-	private int vaga_minima;
-	
+	private Date dataInicio;
+	private Date dataFim;
+	private int vagas;
 	
 	public int getId() {
 		return id;
@@ -28,22 +30,28 @@ public class Treino {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-	public int getVaga_maxima() {
-		return vaga_maxima;
-	}
-	public void setVaga_maxima(int vaga_maxima) {
-		this.vaga_maxima = vaga_maxima;
-	}
-	public int getVaga_minima() {
-		return vaga_minima;
-	}
-	public void setVaga_minima(int vaga_minima) {
-		this.vaga_minima = vaga_minima;
-	}
 	public int getIdTreinador() {
 		return idTreinador;
 	}
 	public void setIdTreinador(int idTreinador) {
 		this.idTreinador = idTreinador;
+	}
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+	public Date getDataFim() {
+		return dataFim;
+	}
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
+	public int getVagas() {
+		return vagas;
+	}
+	public void setVagas(int vagas) {
+		this.vagas = vagas;
 	}
 }
