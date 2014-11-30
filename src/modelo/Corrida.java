@@ -3,6 +3,7 @@ package modelo;
 public class Corrida {
 	
 	private int id;
+	private int id_sessao;
 	private String nome;
 	private String descricao;
 	
@@ -11,6 +12,13 @@ public class Corrida {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getId_sessao() {
+		return id_sessao;
+	}
+	public void setId_sessao(int id_sessao) {
+		this.id_sessao = id_sessao;
 	}
 	public String getNome() {
 		return nome;

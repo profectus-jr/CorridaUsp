@@ -7,16 +7,34 @@
 		xmlns:p="http://primefaces.org/ui">
 		
 	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Corrida USP</title>
+		
+		<style>
+			body {
+				background-color:lightgrey
+			}
+			.header {
+			    background-color:#483D8B;
+			    color:white;
+			    text-align:center;
+			    font-family:monospace;
+			    padding:5px;
+			    font-size:16px;
+			}
+			.header .link{
+				color: white;
+			}
+		</style>
 	</h:head>
 	
-	<h:body>
-		<p:outputLabel value="Corrida USP"/>
-		<h:form>
-			<h:panelGrid id="grid" columns="1">
-				<p:commandButton value="Login corredor" action="#{corredorBean.login}"/>
-				<p:commandButton value="Login treinador" action="#{treinadorBean.login}"/>
-			</h:panelGrid>
-		</h:form>
+    <h:body>
+        <div class="header">
+        	<p:outputLabel value="Corrida USP"/>
+            <h:form style="margin-top:20px;">
+				<p:commandLink class="link" value="Corredores" action="#{corredorBean.login}"/> |
+				<p:commandLink class="link" value="Treinadores" action="#{treinadorBean.login}"/>
+			</h:form>
+        </div>	
 	</h:body>
 </html>

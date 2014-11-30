@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+		
+	<h:head>
+		<title>Corrida USP - Criar sessoes de treino</title>
+	</h:head>
+	
+	<h:body>
+		<h:form>	
+ 			<h:panelGrid id="grid" columns="1">
+ 				<p:outputLabel value="Nome: "/>
+ 				<p:inputText value="#{corridaBean.corrida.nome}"/>
+ 			
+ 				<p:outputLabel for="time" value="Hora: "/>
+        		<p:inputTextarea value="#{corridaBean.corrida.descricao}" />
+ 				
+ 				<p:outputLabel value="Escolha a sessao de treinos: "/>
+				<p:selectOneMenu id="sessao" value="#{corridaBean.corrida.id_sessao}" style="width:150px">
+					<f:selectItem itemLabel="Escolha um" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{corridaBean.listaSessoes}" />
+				</p:selectOneMenu>
+							
+				<p:commandButton value="Confirmar" action="#{corridaBean.inscreveCorrida()}"/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>
