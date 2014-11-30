@@ -20,18 +20,16 @@ public class SessaoTreinoDao {
 		this.conexao = FabricaDeConexao.obterInstancia().obterConexao();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void adiciona(SessaoTreino sessaotreino) {
 		String sql = "insert into sessaotreino "
 				+ "(id_treino,dia_semana,hora,duracao)" + " values (?,?,?,?)";
 
 		try {
-			Statement stat1 = conexao.createStatement(); 
+			Statement stat1 = conexao.createStatement();
+			System.out.println(":]");
 			stat1.execute("set search_path to corridausp"); 
 			
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			
-			System.out.println("hora: " + sessaotreino.getHora());
 						
 			// seta os valores
 			stmt.setInt(1, sessaotreino.getIdTreino());
@@ -49,7 +47,6 @@ public class SessaoTreinoDao {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public ArrayList<SessaoTreino> listaSessoesDoTreino(Treino treino){
 		ArrayList<SessaoTreino> streinos = new ArrayList<SessaoTreino>();
 		try {
