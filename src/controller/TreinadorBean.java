@@ -8,6 +8,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+
 import modelo.SessaoTreino;
 import modelo.Treinador;
 import modelo.Treino;
@@ -21,6 +22,8 @@ public class TreinadorBean {
 	
 	private Treinador treinador =  new Treinador();
 	private Treino treino;
+	private SessaoTreino sessao;
+	private List<SessaoTreino> sessoes;
 	
 	public Treinador getTreinador() {
 		return treinador;
@@ -48,13 +51,15 @@ public class TreinadorBean {
 	}
 	
 	public List<SessaoTreino> getSessoesTreino(){
-		SessaoTreinoDao dao = new SessaoTreinoDao();
-		FacesContext fc = FacesContext.getCurrentInstance();
-		ExternalContext ec = fc.getExternalContext();
-		HttpSession session = (HttpSession) ec.getSession(false);
-		treino = (Treino)session.getAttribute("treino");
-		System.out.println("esse eh o id:" + treino.getId()+ "esse eh o id treinador:");
-		return dao.listaSessoesDoTreino(treino);
+		if(this.sessoes == null){
+			SessaoTreinoDao dao = new SessaoTreinoDao();
+			FacesContext fc = FacesContext.getCurrentInstance();
+			ExternalContext ec = fc.getExternalContext();
+			HttpSession session = (HttpSession) ec.getSession(false);
+			treino = (Treino)session.getAttribute("treino");
+			this.sessoes = dao.listaSessoesDoTreino(treino);
+		}
+		return this.sessoes;
 	}
 	
 	public String inscreveTreino() {
@@ -69,6 +74,7 @@ public class TreinadorBean {
 		this.treino.setIdTreinador(treinador.getId());
 		dao.adiciona(this.treino);
 		this.treino = new Treino();*/
+		//this.sessoes = null;
 		return "/treinador/visualizarSessaoTreinohome?faces-redirect=true";
 	}
 
@@ -113,28 +119,36 @@ public class TreinadorBean {
 	}
 	
 	public String visualizarSessao(Treino treino) {
-		System.out.println("cliquei para vizualizar as sessoes");
-
 		this.setTreino(treino);
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
-		System.out.println("esperando para obter a sessao");
-
 		HttpSession session = (HttpSession) ec.getSession(false);
-		System.out.println("sessao recebida");
-
 		session.setAttribute("treino", treino);
-		
-		//return "/treinador/visualizarSessaoTreino?faces-redirect=true";
 		return "/SessaoTreino/home?faces-redirect=true";
-
 	}
-
+	
+	public String criarCorrida(SessaoTreino sessao) {
+		this.setSessao(sessao);
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		session.setAttribute("streino", sessao);
+		return "/corrida/novaCorrida?faces-redirect=true";
+	}
+	
 	public Treino getTreino() {
 		return treino;
 	}
 
 	public void setTreino(Treino treino) {
 		this.treino = treino;
+	}
+
+	public SessaoTreino getSessao() {
+		return sessao;
+	}
+
+	public void setSessao(SessaoTreino sessao) {
+		this.sessao = sessao;
 	}
 }

@@ -6,43 +6,54 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Corrida USP</title>
-</h:head>
-
-<h:body>
-	<p:outputLabel value="Homepage do treinador" />
-	<h:form>
-		<h:panelGrid id="grid" columns="1">
-			<p:commandButton value="Cria treino" action="#{treinoBean.inscreve}" />
-			<p:commandButton value="Sair" action="#{treinadorBean.logout}" />
-
-		</h:panelGrid>
-	</h:form>
-	<p:dataTable var="treino" value="#{treinadorBean.listaTreinos}">
-		<p:column headerText="Id">
-			<h:outputText value="#{treino.id}" />
-		</p:column>
-		<p:column headerText="Descrição">
-			<h:outputText value="#{treino.descricao}" />
-		</p:column>
-		<p:column headerText="Situação">
-			<h:outputText value="#{treino.situacao}" />
-		</p:column>
-		<p:column headerText="Data do inicio">
-			<h:outputText value="#{treino.dataInicio}" />
-		</p:column>
-		<p:column headerText="Data do fim">
-			<h:outputText value="#{treino.dataFim}" />
-		</p:column>
-		<p:column headerText="Vagas">
-			<h:outputText value="#{treino.vagas}" />
-		</p:column>
-		<p:column >
-			<p:commandButton value="vizualizar"
-				action="#{treinadorBean.visualizarSessao(treino)}" />
-		</p:column>
-	</p:dataTable>
-
-</h:body>
+	<h:head>
+		<title>Corrida USP</title>
+	</h:head>
+	
+	<h:body>
+		<h:head>
+			Corridas USP - Treinador
+			<h:form style="table-layout:fixed; font-size:15px; margin-top:40px;">
+				<p:commandButton value="Criar treino" action="#{treinoBean.inscreve}" style="width: auto; height: 25px;font-size:70%;"/>
+				<p:commandButton value="Sair" action="#{treinadorBean.logout}" style="width: auto; height: 25px;font-size:70%;" />
+			</h:form>
+		</h:head>
+		
+		<h:form> 
+			<p:dataTable var="treino" value="#{treinadorBean.listaTreinos}" style="table-layout:fixed; font-size:12px; margin-top:40px;">
+		
+				<p:column headerText="Descrição">
+					<h:outputText value="#{treino.descricao}" />
+				</p:column>
+		
+				<p:column headerText="Situação">
+					<h:outputText value="#{treino.situacao}" />
+				</p:column>
+		
+				<p:column headerText="Data do inicio">
+					<h:outputText value="#{treino.dataInicio}" />
+				</p:column>
+		
+				<p:column headerText="Data do fim">
+					<h:outputText value="#{treino.dataFim}" />
+				</p:column>
+		
+				<p:column headerText="Vagas" width="100">
+					<h:outputText value="#{treino.vagas}" />
+				</p:column>	
+				
+				<p:column width="50">
+					<p:commandLink value="visualizar"
+						action="#{treinadorBean.visualizarSessao(treino)}" />
+				</p:column>
+				
+				<p:column width="50">
+    				<p:commandLink value="Editar" action="#{treinadorBean.editar(treino)}" />
+    			</p:column>
+                <p:column width="50">
+                	<p:commandLink value="Remover" action="#{treinadorBean.remover(treino)}" />
+                </p:column>
+			</p:dataTable>		
+		</h:form>		
+	</h:body>
 </html>

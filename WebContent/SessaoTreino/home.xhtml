@@ -6,34 +6,51 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Corrida USP - Sessões de treinos</title>
-</h:head>
+	<h:head>
+		<title>Corrida USP - Sessões de treinos</title>
+	</h:head>
 
-<h:body>
-	<p:outputLabel value="Sessões de treino" />
+	<h:body>
+		<p:outputLabel value="Sessões de treino" />
 
-	<h:form>
-		<h:panelGrid id="grid" columns="1">
-			<p:commandButton value="Nova sessão" action="#{sessaoTreinoBean.novaSessaoTreinoPagina}" />
-			<p:commandButton value="Voltar aos treinos" action="#{sessaoTreinoBean.retornarAoMenuTreinador}" />
-		</h:panelGrid>
-	</h:form>
-	<p:dataTable var="streino" value="#{treinadorBean.sessoesTreino}">
-		<p:column headerText="Id">
-			<h:outputText value="#{streino.id}" />
-		</p:column>
-		<p:column headerText="Dia da semana">
-			<h:outputText value="#{streino.diaSemana}" />
-		</p:column>
-		<p:column headerText="Hora">
-			<h:outputText value="#{streino.hora}" >
-				<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-			</h:outputText> 
-		</p:column>
-		<p:column headerText="Duração">
-			<h:outputText value="#{streino.duracao}" />
-		</p:column>
-	</p:dataTable>
-</h:body>
+		<h:form>
+			<h:panelGrid id="grid" columns="1">
+				<p:commandButton value="Nova sessão" action="#{sessaoTreinoBean.novaSessaoTreinoPagina}" />
+				<p:commandButton value="Voltar aos treinos" action="#{sessaoTreinoBean.retornarAoMenuTreinador}" />
+			</h:panelGrid>
+		</h:form>
+	
+		<p:dataTable var="streino" value="#{treinadorBean.sessoesTreino}" style="table-layout:fixed; font-size:12px; margin-top:40px;">
+			<p:column headerText="Id">
+				<h:outputText value="#{streino.id}" />
+			</p:column>
+			
+			<p:column headerText="Dia da semana">
+				<h:outputText value="#{streino.diaSemana}" />
+			</p:column>
+			
+			<p:column headerText="Hora">
+				<h:outputText value="#{streino.hora}" >
+					<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+				</h:outputText> 
+			</p:column>
+			
+			<p:column headerText="Duração">
+				<h:outputText value="#{streino.duracao}" />
+			</p:column>
+		
+			<p:column width="50">
+				<p:commandLink value="Criar Corrida"
+				action="#{treinadorBean.criarCorrida(streino)}" />
+			</p:column>
+				
+			<p:column width="50">
+    			<p:commandLink value="Editar" action="#{treinadorBean.editarCorrida(streino)}" />
+    		</p:column>
+                
+        	<p:column width="50">
+        		<p:commandLink value="Remover" action="#{treinadorBean.removerCorrida(streino)}" />
+        	</p:column>
+		</p:dataTable>
+	</h:body>
 </html>

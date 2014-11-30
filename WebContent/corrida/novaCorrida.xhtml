@@ -7,7 +7,7 @@
 		xmlns:p="http://primefaces.org/ui">
 		
 	<h:head>
-		<title>Corrida USP - Criar sessoes de treino</title>
+		<title>Corrida USP - Criar corrida</title>
 	</h:head>
 	
 	<h:body>
@@ -16,16 +16,10 @@
  				<p:outputLabel value="Nome: "/>
  				<p:inputText value="#{corridaBean.corrida.nome}"/>
  			
- 				<p:outputLabel for="time" value="Hora: "/>
+ 				<p:outputLabel value="Descricao: "/>
         		<p:inputTextarea value="#{corridaBean.corrida.descricao}" />
- 				
- 				<p:outputLabel value="Escolha a sessao de treinos: "/>
-				<p:selectOneMenu id="sessao" value="#{corridaBean.corrida.id_sessao}" style="width:150px">
-					<f:selectItem itemLabel="Escolha um" itemValue="" noSelectionOption="true" />
-					<f:selectItems value="#{corridaBean.listaSessoes}" />
-				</p:selectOneMenu>
-							
-				<p:commandButton value="Confirmar" action="#{corridaBean.inscreveCorrida()}"/>
+ 			
+				<p:commandButton value="Confirmar" action="#{corridaBean.inscreveCorrida}"/>
 			</h:panelGrid>
 		</h:form>
 	</h:body>
