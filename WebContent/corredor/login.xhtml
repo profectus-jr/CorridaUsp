@@ -11,9 +11,10 @@
 	</h:head>
 	
 	<h:body>
-		<p:outputLabel value="Login do treinador"/>
+		<div align="center">
+		<p:outputLabel value="Login do corredor"/>
 		<h:form>
-			<h:panelGrid id="grid" columns="1">
+			<h:panelGrid id="grid" columns="1" style="table-layout:fixed; font-size:12px; margin-top:40px;">
 				
 				<p:outputLabel value="E-mail: "/>
  				<p:inputText value="#{corredorBean.corredor.email}"/>
@@ -22,13 +23,10 @@
  				<p:inputText value="#{corredorBean.corredor.senha}"/>
 
 				<p:commandButton value="Confirmar" action="#{corredorBean.inscreveCorredor}"/>
+				<p:commandLink value="Inscreva-se" action="#{corredorBean.inscreve}"/>
 				
 			</h:panelGrid>
-		</h:form>
-
-		<h:form>
-			<p:commandButton value="Inscreve corredor" action="#{corredorBean.inscreve}"/>
-		</h:form>
-		
+		</h:form>		
+		</div>
 	</h:body>
 </html>
