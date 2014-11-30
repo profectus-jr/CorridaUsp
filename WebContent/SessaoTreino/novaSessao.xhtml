@@ -12,7 +12,8 @@
 
 <h:body>
 	<h:form>
-		<h:panelGrid id="grid" columns="1">
+		<p:outputLabel value="Nova Sessão" />
+		<h:panelGrid id="grid" columns="1" style="table-layout:fixed; font-size:12px; margin-top:40px;">
 			<p:outputLabel value="Dia da semana: " />
 			<p:selectOneMenu id="diasemana" value="#{sessaoTreinoBean.sessaoTreino.diaSemana}"
 				style="width:150px">

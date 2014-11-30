@@ -11,8 +11,9 @@
 </h:head>
 
 <h:body>
+	<p:outputLabel value="Novo treino" />
 	<h:form>
-		<h:panelGrid id="grid" columns="1">
+		<h:panelGrid id="grid" columns="1" style="table-layout:fixed; font-size:12px; margin-top:35px;">
 			<p:outputLabel value="Descricao: " />
 			<p:inputTextarea value="#{treinoBean.treino.descricao}" />
 
@@ -35,6 +36,9 @@
 
 			<p:commandButton value="Confirmar"
 				action="#{treinoBean.inscreveTreino}" />
+				
+			<p:commandButton value="Voltar"
+				action="#{treinadorBean.retornarAoMenuTreinador}" />
 		</h:panelGrid>
 	</h:form>
 </h:body>

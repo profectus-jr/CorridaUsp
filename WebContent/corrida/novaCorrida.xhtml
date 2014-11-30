@@ -11,8 +11,9 @@
 	</h:head>
 	
 	<h:body>
+		<p:outputLabel value="Nova corrida"/>
 		<h:form>	
- 			<h:panelGrid id="grid" columns="1">
+ 			<h:panelGrid id="grid" columns="1" style="table-layout:fixed; font-size:12px; margin-top:40px;">
  				<p:outputLabel value="Nome: "/>
  				<p:inputText value="#{corridaBean.corrida.nome}"/>
  			
@@ -20,6 +21,9 @@
         		<p:inputTextarea value="#{corridaBean.corrida.descricao}" />
  			
 				<p:commandButton value="Confirmar" action="#{corridaBean.inscreveCorrida}"/>
+				
+				<p:commandButton value="Voltar"
+				action="#{sessaoTreinoBean.retornarAHomeSessaoTreino}" />
 			</h:panelGrid>
 		</h:form>
 	</h:body>
