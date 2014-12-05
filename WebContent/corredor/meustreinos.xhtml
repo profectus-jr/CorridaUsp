@@ -11,18 +11,19 @@
 	</h:head>
 	
 	<h:body>
-		<p:outputLabel value="Homepage do corredor"/>
+		<p:outputLabel value="Meus Treinos"/>
 		<h:form>
 			<h:panelGrid id="grid" columns="3">
 				<p:commandButton value="Sair" action="#{corredorBean.logout}"/>
 				<p:commandButton value="Home" action="#{corredorBean.home}"/>
+			
 				<p:commandButton value="Meus Treinos" action="#{corredorBean.meusTreinos}"/>
 				
 			</h:panelGrid>
 		</h:form>
 		
 		
-		<p:dataTable var="treino" value="#{corredorBean.listaTreinos}" style="table-layout:fixed; font-size:12px; margin-top:40px;">
+		<p:dataTable var="treino" value="#{corredorBean.listaTreinosCorredor}" style="table-layout:fixed; font-size:12px; margin-top:40px;">
 		
 				<p:column headerText="Descrição">
 					<h:outputText value="#{treino.descricao}" />
@@ -40,10 +41,7 @@
 					<h:outputText value="#{treino.dataFim}" />
 				</p:column>
 		
-				<p:column headerText="Vagas" width="100">
-					<h:outputText value="#{treino.vagas}" />
-				</p:column>	
-				
+					
 				<p:column width="50">
 					<p:commandLink value="Visualizar"
 						 />

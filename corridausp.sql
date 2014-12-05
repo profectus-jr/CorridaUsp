@@ -61,7 +61,7 @@ CREATE TABLE TreinoCorredor(
   idTreino int references Treino(id) ON UPDATE CASCADE ON DELETE CASCADE,
   idCorredor int references Corredor(idCorredor) ON UPDATE CASCADE ON DELETE CASCADE,
   data date not null,
-  data_termino date not null, /*data da inscricao*/
+  data_termino date, 
   situacao_inscricao varchar(20) not null,
   nota int,
   comentario text,
