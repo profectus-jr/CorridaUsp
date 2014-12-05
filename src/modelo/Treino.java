@@ -11,6 +11,7 @@ public class Treino {
 	private Date dataInicio;
 	private Date dataFim;
 	private int vagas;
+	private int numVagas;
 	
 	public int getId() {
 		return id;
@@ -53,5 +54,11 @@ public class Treino {
 	}
 	public void setVagas(int vagas) {
 		this.vagas = vagas;
+	}
+	public int getNumVagas() {
+		return numVagas;
+	}
+	public void setNumVagas(int numVagas) {
+		this.numVagas = numVagas;
 	}
 }

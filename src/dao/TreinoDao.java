@@ -67,7 +67,7 @@ public class TreinoDao {
 			try {
 				Statement stat1 = conexao.createStatement(); 
 				stat1.execute("set search_path to corridausp");
-				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas FROM treino WHERE idTreinador = ?");
+				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas,numVagas FROM treino WHERE idTreinador = ?");
 				stat.clearParameters(); 
 				stat.setInt(1, treinador.getId());
 				ResultSet resp = stat.executeQuery();
@@ -79,6 +79,7 @@ public class TreinoDao {
 					treino.setDataInicio(resp.getDate(4));
 					treino.setDataFim(resp.getDate(5));
 					treino.setVagas(resp.getInt(6));
+					treino.setNumVagas(resp.getInt(7));
 					treinos.add(treino);
 				}
 			} catch (SQLException e) {

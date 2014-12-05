@@ -19,11 +19,11 @@ ALTER TABLE Usuario OWNER TO mac439_grupo1_2014;
 */
 
 CREATE TABLE Corredor (
+  idCorredor SERIAL PRIMARY KEY,
   nome varchar(100) not null,
   senha varchar(100) not null,
   email varchar(50) not null,
   num_telefone varchar(20),
-  idCorredor SERIAL PRIMARY KEY,
   data_nascimento date not null,
   peso TIPO_DECIMAL CHECK(peso > 0.00),
   altura TIPO_DECIMAL CHECK(altura > 0.00),
@@ -33,11 +33,11 @@ CREATE TABLE Corredor (
 ALTER TABLE Corredor OWNER TO mac439_grupo1_2014;
 
 CREATE TABLE Treinador(
+   idTreinador SERIAL PRIMARY KEY,
   nome varchar(100) not null,
   senha varchar(100) not null,
   email varchar(50) not null,
   num_telefone varchar(20),
-  idTreinador SERIAL PRIMARY KEY,
   curriculo text not null
 );
 ALTER TABLE Treinador OWNER TO mac439_grupo1_2014;
@@ -161,7 +161,7 @@ ALTER TABLE TrechoCorredor OWNER TO mac439_grupo1_2014;
 INSERT INTO Treinador(idTreinador,nome,senha,email,num_telefone,curriculo) VALUES (1,'treinador1','0ae48bf7e75f2efbeba64ed53559f4','treinador1@mail','123456','Treinador de corrida');
 --Corredor
 --INSERT INTO Usuario(nome,senha,email,num_telefone) VALUES ('corredor1','corredor1','corredor1@mail','789123');
-INSERT INTO Corredor(idCorredor,data_nascimento, peso, altura, sexo,nome,senha,email,num_telefone) VALUES (1,'09/13/1995',65,1.70,'M','corredor1','corredor1','corredor1@mail','789123');
+INSERT INTO Corredor(idCorredor,nome,senha,email,num_telefone, data_nascimento, peso, altura, sexo) VALUES (1,'corredor1','d59911db401c76f7deabd71e1036d61','corredor1@mail','789123','09/13/1995',65,1.70,'M');
 
 --Treino
 INSERT INTO Treino(idTreinador, descricao, situacao, vagas, numVagas, data_inicio, data_fim) VALUES (1,'Principiantes','incricoes',10,10,'12/05/2014','12/20/2014');
