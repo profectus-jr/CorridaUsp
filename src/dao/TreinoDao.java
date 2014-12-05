@@ -1,12 +1,12 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import modelo.Treinador;
 import modelo.Treino;
 import conexao.FabricaDeConexao;
@@ -45,6 +45,18 @@ public class TreinoDao {
 			} catch (SQLException e) {
 				// A SQLException é "encapsulada" em uma RuntimeException
 				// para desacoplar o código da API de JDBC
+				throw new RuntimeException(e);
+			}
+		}
+		
+		public void remove(Treino treino) {
+			try {
+				PreparedStatement stmt = conexao.prepareStatement("delete "
+						+ "from treino where id=?");
+				stmt.setLong(1, treino.getId());
+				stmt.execute();
+				stmt.close();
+			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
 		}

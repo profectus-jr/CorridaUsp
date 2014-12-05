@@ -47,6 +47,18 @@ public class SessaoTreinoDao {
 		}
 	}
 	
+	public void remove(SessaoTreino sessao) {
+		try {
+			PreparedStatement stmt = conexao.prepareStatement("delete "
+					+ "from sessaotreino where id=?");
+			stmt.setLong(1, sessao.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public ArrayList<SessaoTreino> listaSessoesDoTreino(Treino treino){
 		ArrayList<SessaoTreino> streinos = new ArrayList<SessaoTreino>();
 		try {

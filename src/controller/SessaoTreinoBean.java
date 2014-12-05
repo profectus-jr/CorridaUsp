@@ -1,6 +1,7 @@
 package controller;
 
 import javax.faces.bean.ManagedBean;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,12 @@ public class SessaoTreinoBean {
 	public String novaSessaoTreino(){
 		SessaoTreinoDao sessaoTreinoDao = new SessaoTreinoDao();
 		sessaoTreinoDao.adiciona(this.sessaoTreino);
+		return "/SessaoTreino/home?faces-redirect=true";
+	}
+	
+	public String remove(SessaoTreino sessao){
+		SessaoTreinoDao dao = new SessaoTreinoDao();
+		dao.remove(sessao);
 		return "/SessaoTreino/home?faces-redirect=true";
 	}
 	

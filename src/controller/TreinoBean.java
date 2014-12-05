@@ -43,19 +43,13 @@ public class TreinoBean {
 		return "/treinador/home?faces-redirect=true";
 	}
 
-//	public String getSituacao() {
-//		return situacao;
-//	}
-//
-//	public void setSituacao(String situacao) {
-//		this.situacao = situacao;
-//	}
-
 	public String[] getSituacoes() {
 		return situacoes;
 	}
-
-//	public void setSituacoes(String situacoes[]) {
-//		this.situacoes = situacoes;
-//	}	
+	
+	public String remove(Treino treino){
+		TreinoDao dao = new TreinoDao();
+		dao.remove(treino);
+		return "/treinador/home?faces-redirect=true";
+	}
 }
