@@ -26,7 +26,6 @@ public class SessaoTreinoDao {
 
 		try {
 			Statement stat1 = conexao.createStatement();
-			System.out.println(":]");
 			stat1.execute("set search_path to corridausp"); 
 			
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -49,6 +48,8 @@ public class SessaoTreinoDao {
 	
 	public void remove(SessaoTreino sessao) {
 		try {
+			Statement stat1 = conexao.createStatement();
+			stat1.execute("set search_path to corridausp"); 
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from sessaotreino where id=?");
 			stmt.setLong(1, sessao.getId());

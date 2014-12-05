@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -13,6 +15,8 @@ import dao.TreinoDao;
 public class TreinoBean {
 
 	private Treino treino =  new Treino();
+	private List<Treino> treinos;
+	
 	//private String situacao;
 	private String situacoes[] = {"encerrado","inscricoes","ativo", "desativado"};
 
@@ -54,7 +58,16 @@ public class TreinoBean {
 	}
 	
 	public String editar(Treino treino){
-		this.treino = treino;
+		System.out.println(treino.getDescricao());
+		this.treinos.add(treino);
 		return "/treino/editar?faces-redirect=true";
+	}
+
+	public List<Treino> getTreinos() {
+		return treinos;
+	}
+
+	public void setTreinos(List<Treino> treinos) {
+		this.treinos = treinos;
 	}
 }

@@ -52,6 +52,8 @@ public class TreinoDao {
 		
 		public void remove(Treino treino) {
 			try {
+				Statement stat1 = conexao.createStatement(); 
+				stat1.execute("set search_path to corridausp");
 				PreparedStatement stmt = conexao.prepareStatement("delete "
 						+ "from treino where id=?");
 				stmt.setLong(1, treino.getId());
