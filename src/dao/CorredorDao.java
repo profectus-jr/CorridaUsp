@@ -3,10 +3,12 @@ package dao;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import modelo.Corredor;
+import conexao.Cryptography;
 import conexao.FabricaDeConexao;
 
 
@@ -51,6 +53,33 @@ public class CorredorDao {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public boolean isCorredor(Corredor corredor) {
+		Corredor cor = new Corredor();
+		int id = 0;
+		try {
+			Statement stat1 = conexao.createStatement(); 
+			stat1.execute("set search_path to corridausp");
+			PreparedStatement stat = conexao.prepareStatement("SELECT * FROM corredor WHERE email = ?");
+			stat.clearParameters(); 
+			stat.setString(1, corredor.getEmail());
+			ResultSet resp = stat.executeQuery();
+			while (resp.next()) {
+				cor.setSenha(resp.getString("senha"));
+				id = resp.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String senhaCripto = new Cryptography().geraMd5(corredor.getSenha());
+		if (cor != null && cor.getSenha().equals(senhaCripto)) {
+			corredor.setId(id);
+			return true;
+		}				
+		return false;
+	}
+	
 
 	/*public void altera(Corredor corredor) {
 		String sql = "update contatos set email=?, senha=?, peso=?, altura=?"
