@@ -22,7 +22,7 @@ public class TreinoDao {
 
 		public void adiciona(Treino treino) {
 			String sql = "insert into treino "
-					+ "(id_treinador,descricao,situacao,data_inicio,data_fim,vagas)" + " values (?,?,?,?,?,?)";
+					+ "(idTreinador,descricao,situacao,data_inicio,data_fim,vagas,numVagas)" + " values (?,?,?,?,?,?,?)";
 
 			try {
 
@@ -38,6 +38,7 @@ public class TreinoDao {
 				stmt.setDate(4, new java.sql.Date(treino.getDataInicio().getTime()));
 				stmt.setDate(5, new java.sql.Date(treino.getDataFim().getTime()));
 				stmt.setInt(6, treino.getVagas());
+				stmt.setInt(7, treino.getVagas());
 
 				// executa
 				stmt.execute();
@@ -66,7 +67,7 @@ public class TreinoDao {
 			try {
 				Statement stat1 = conexao.createStatement(); 
 				stat1.execute("set search_path to corridausp");
-				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas FROM treino WHERE id_treinador = ?");
+				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas FROM treino WHERE idTreinador = ?");
 				stat.clearParameters(); 
 				stat.setInt(1, treinador.getId());
 				ResultSet resp = stat.executeQuery();
