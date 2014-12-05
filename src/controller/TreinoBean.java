@@ -52,4 +52,9 @@ public class TreinoBean {
 		dao.remove(treino);
 		return "/treinador/home?faces-redirect=true";
 	}
+	
+	public String editar(Treino treino){
+		this.treino = treino;
+		return "/treino/editar?faces-redirect=true";
+	}
 }
