@@ -1,12 +1,13 @@
 package dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import modelo.Corredor;
 import modelo.Treinador;
 import modelo.Treino;
 import conexao.FabricaDeConexao;
@@ -86,6 +87,63 @@ public class TreinoDao {
 			}
 		}
 		
+		public ArrayList<Treino> listaTreinos(Corredor corredor){
+			ArrayList<Treino> treinos = new ArrayList<Treino>();
+			try {
+				Statement stat1 = conexao.createStatement(); 
+				stat1.execute("set search_path to corridausp");
+				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas FROM treino WHERE treino.id NOT IN (SELECT treino.id FROM treinocorredor JOIN treino ON(treino.id = treinocorredor.idtreino AND treinocorredor.idcorredor = ?))");
+				stat.clearParameters(); 
+				stat.setInt(1, corredor.getId());
+
+				ResultSet resp = stat.executeQuery();
+				while (resp.next()) {
+					Treino treino = new Treino();
+					treino.setId(resp.getInt(1));
+					treino.setDescricao(resp.getString(2));
+					treino.setSituacao(resp.getString(3));
+					treino.setDataInicio(resp.getDate(4));
+					treino.setDataFim(resp.getDate(5));
+					treino.setVagas(resp.getInt(6));
+				
+					treinos.add(treino);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return treinos;
+		}
+		
+		public ArrayList<Treino> listaTreinosCorredor(Corredor corredor){
+			ArrayList<Treino> treinos = new ArrayList<Treino>();
+			try {
+				Statement stat1 = conexao.createStatement(); 
+				stat1.execute("set search_path to corridausp");
+				PreparedStatement stat = conexao.prepareStatement("SELECT treino.id,treino.descricao, situacao, data_inicio,data_fim,vagas FROM treinocorredor JOIN treino ON(treino.id = treinocorredor.idtreino AND treinocorredor.idcorredor = ?)");
+				stat.clearParameters(); 
+				stat.setInt(1, corredor.getId());
+
+				
+				ResultSet resp = stat.executeQuery();
+				while (resp.next()) {
+					Treino treino = new Treino();
+					treino.setId(resp.getInt(1));
+					treino.setDescricao(resp.getString(2));
+					treino.setSituacao(resp.getString(3));
+					treino.setDataInicio(resp.getDate(4));
+					treino.setDataFim(resp.getDate(5));
+					treino.setVagas(resp.getInt(6));
+
+					treinos.add(treino);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return treinos;
+		}
+
 		public ArrayList<Treino> listaTreinosPorTreinador(Treinador treinador){
 			ArrayList<Treino> treinos = new ArrayList<Treino>();
 			try {
