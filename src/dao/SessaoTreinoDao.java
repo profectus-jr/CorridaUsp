@@ -59,6 +59,27 @@ public class SessaoTreinoDao {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
+	public void altera(SessaoTreino sessao) {
+		String sql = "update sessaotreino set dia_semana=?, hora=?, duracao=?"
+			+ "where id=?";
+		try {
+			Statement stat1 = conexao.createStatement(); 
+			stat1.execute("set search_path to corridausp");
+			
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setLong(4, sessao.getId());
+			stmt.setString(1, sessao.getDiaSemana());
+			stmt.setTimestamp(2, new java.sql.Timestamp(sessao.getHora().getTime()));
+			stmt.setFloat(3, sessao.getDuracao());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 
 	public ArrayList<SessaoTreino> listaSessoesDoTreino(Treino treino){
 		ArrayList<SessaoTreino> streinos = new ArrayList<SessaoTreino>();

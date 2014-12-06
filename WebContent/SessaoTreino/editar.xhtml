@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Corrida USP - Nova sessão de treino</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:outputLabel value="Nova Sessão" />
+		<h:panelGrid id="grid" columns="1" style="table-layout:fixed; font-size:12px; margin-top:40px;">
+			<p:outputLabel value="Dia da semana: " />
+			<p:selectOneMenu id="diasemana" value="#{sessaoTreinoBean.sessoes.diaSemana}"
+				style="width:150px">
+				<f:selectItem itemLabel="Defina o dia" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{sessaoTreinoBean.diasSemana}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Hora: " />
+			<p:calendar value="#{sessaoTreinoBean.sessoes.hora}" pattern="HH:mm" timeOnly="true"  />
+
+			<p:outputLabel value="Duração: " />
+			<p:inputText value="#{sessaoTreinoBean.sessoes.duracao}" />
+
+			<p:commandButton value="Confirmar"
+				action="#{sessaoTreinoBean.atualizar}" />
+
+			<p:commandButton value="Voltar"
+				action="#{sessaoTreinoBean.retornarAHomeSessaoTreino}" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

@@ -1,7 +1,6 @@
 package controller;
 
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -9,11 +8,13 @@ import javax.servlet.http.HttpSession;
 import modelo.SessaoTreino;
 import modelo.Treino;
 import dao.SessaoTreinoDao;
+import dao.TreinoDao;
 
 @ManagedBean
 public class SessaoTreinoBean {
 	
 	private SessaoTreino sessaoTreino;
+	private SessaoTreino sessoes = new SessaoTreino();
 	
 	private String diasSemana[] = {"segunda","terca","quarta", "quinta", "sexta", "sabado", "domingo"};
 	
@@ -24,6 +25,36 @@ public class SessaoTreinoBean {
 		HttpSession session = (HttpSession) ec.getSession(false);
 		Treino treino = (Treino)session.getAttribute("treino");
 		this.sessaoTreino.setIdTreino(treino.getId());
+	}
+	
+	public SessaoTreino getSessoes() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		SessaoTreino sessoes = (SessaoTreino) session.getAttribute("sessaotreino");
+		return sessoes;
+	}
+
+	public void setSessoes(SessaoTreino sessoes) {
+		this.sessoes = sessoes;
+	}
+	
+	public String editar(SessaoTreino sessoes){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		session.setAttribute("sessaotreino", sessoes);
+		return "/SessaoTreino/editar?faces-redirect=true";
+	}
+	
+	public String atualizar(){
+		SessaoTreinoDao dao = new SessaoTreinoDao();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		sessoes = (SessaoTreino)session.getAttribute("sessaotreino");
+		dao.altera(sessoes);
+		return "/treinador/home?faces-redirect=true";
 	}
 	
 	public String novaSessaoTreino(){
