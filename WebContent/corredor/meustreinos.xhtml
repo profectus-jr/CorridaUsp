@@ -41,16 +41,12 @@
 					<h:outputText value="#{treino.dataFim}" />
 				</p:column>
 		
+				<p:column headerText="Vagas" width="100">
+					<h:outputText value="#{treino.vagas}" />
+				</p:column>		
 					
-				<p:column width="50">
-					<p:commandLink value="Visualizar"
-						 />
-				</p:column>
-				
-				<p:column width="50">
-    				<p:commandLink value="Editar"  />
-    			</p:column>
-                <p:column width="50">
+					
+			    <p:column width="50">
                 	<p:commandLink value="Inscrever" action="#{corredorBean.inscreverEmTreino(treino)}" />
                 </p:column>
 			</p:dataTable>		

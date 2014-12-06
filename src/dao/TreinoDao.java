@@ -70,7 +70,7 @@ public class TreinoDao {
 			try {
 				Statement stat1 = conexao.createStatement(); 
 				stat1.execute("set search_path to corridausp");
-				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim FROM treino WHERE treino.id NOT IN (SELECT treino.id FROM treinocorredor JOIN treino ON(treino.id = treinocorredor.idtreino AND treinocorredor.idcorredor = ?))");
+				PreparedStatement stat = conexao.prepareStatement("SELECT id,descricao,situacao,data_inicio,data_fim,vagas FROM treino WHERE treino.id NOT IN (SELECT treino.id FROM treinocorredor JOIN treino ON(treino.id = treinocorredor.idtreino AND treinocorredor.idcorredor = ?))");
 				stat.clearParameters(); 
 				stat.setInt(1, corredor.getId());
 
@@ -82,6 +82,7 @@ public class TreinoDao {
 					treino.setSituacao(resp.getString(3));
 					treino.setDataInicio(resp.getDate(4));
 					treino.setDataFim(resp.getDate(5));
+					treino.setVagas(resp.getInt(6));
 				
 					treinos.add(treino);
 				}
@@ -97,7 +98,7 @@ public class TreinoDao {
 			try {
 				Statement stat1 = conexao.createStatement(); 
 				stat1.execute("set search_path to corridausp");
-				PreparedStatement stat = conexao.prepareStatement("SELECT treino.id,treino.descricao, situacao, data_inicio,data_fim FROM treinocorredor JOIN treino ON(treino.id = treinocorredor.idtreino AND treinocorredor.idcorredor = ?)");
+				PreparedStatement stat = conexao.prepareStatement("SELECT treino.id,treino.descricao, situacao, data_inicio,data_fim,vagas FROM treinocorredor JOIN treino ON(treino.id = treinocorredor.idtreino AND treinocorredor.idcorredor = ?)");
 				stat.clearParameters(); 
 				stat.setInt(1, corredor.getId());
 
@@ -110,6 +111,8 @@ public class TreinoDao {
 					treino.setSituacao(resp.getString(3));
 					treino.setDataInicio(resp.getDate(4));
 					treino.setDataFim(resp.getDate(5));
+					treino.setVagas(resp.getInt(6));
+
 					treinos.add(treino);
 				}
 			} catch (SQLException e) {

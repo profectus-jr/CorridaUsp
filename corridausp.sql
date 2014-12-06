@@ -22,7 +22,7 @@ CREATE TABLE Corredor (
   idCorredor SERIAL PRIMARY KEY,
   nome varchar(100) not null,
   senha varchar(100) not null,
-  email varchar(50) not null,
+  email varchar(50) not null UNIQUE,
   num_telefone varchar(20),
   data_nascimento date not null,
   peso TIPO_DECIMAL CHECK(peso > 0.00),
@@ -36,7 +36,7 @@ CREATE TABLE Treinador(
    idTreinador SERIAL PRIMARY KEY,
   nome varchar(100) not null,
   senha varchar(100) not null,
-  email varchar(50) not null,
+  email varchar(50) not null UNIQUE,
   num_telefone varchar(20),
   curriculo text not null
 );
@@ -158,10 +158,10 @@ ALTER TABLE TrechoCorredor OWNER TO mac439_grupo1_2014;
 --Usuario
 --Treinador
 --INSERT INTO Usuario(nome,senha,email,num_telefone) VALUES ('treinador1','treinador1','treinador1@mail','123456');
-INSERT INTO Treinador(idTreinador,nome,senha,email,num_telefone,curriculo) VALUES (1,'treinador1','0ae48bf7e75f2efbeba64ed53559f4','treinador1@mail','123456','Treinador de corrida');
+INSERT INTO Treinador(nome,senha,email,num_telefone,curriculo) VALUES ('treinador1','0ae48bf7e75f2efbeba64ed53559f4','treinador1@mail','123456','Treinador de corrida');
 --Corredor
 --INSERT INTO Usuario(nome,senha,email,num_telefone) VALUES ('corredor1','corredor1','corredor1@mail','789123');
-INSERT INTO Corredor(idCorredor,nome,senha,email,num_telefone, data_nascimento, peso, altura, sexo) VALUES (1,'corredor1','d59911db401c76f7deabd71e1036d61','corredor1@mail','789123','09/13/1995',65,1.70,'M');
+INSERT INTO Corredor(nome,senha,email,num_telefone, data_nascimento, peso, altura, sexo) VALUES ('corredor1','d59911db401c76f7deabd71e1036d61','corredor1@mail','789123','09/13/1995',65,1.70,'M');
 
 --Treino
 INSERT INTO Treino(idTreinador, descricao, situacao, vagas, numVagas, data_inicio, data_fim) VALUES (1,'Principiantes','incricoes',10,10,'12/05/2014','12/20/2014');
@@ -216,3 +216,24 @@ INSERT INTO TrechoCorredor(pontoInicial, pontoFinal, idCorredor, nota, data, com
 INSERT INTO TrechoCorredor(pontoInicial, pontoFinal, idCorredor, nota, data, comentario) VALUES (3,4,1,6.0,'10/20/2014','Ok');
 INSERT INTO TrechoCorredor(pontoInicial, pontoFinal, idCorredor, nota, data, comentario) VALUES (4,5,1,4.5,'05/09/2014','Muitos buracos');
 INSERT INTO TrechoCorredor(pontoInicial, pontoFinal, idCorredor, nota, data, comentario) VALUES (5,1,1,7.0,'04/29/2014','Ok');
+
+
+
+---garante que um treino nao tera mais alunos do que o numero de vagas
+CREATE OR REPLACE FUNCTION novas_Vagas_disponiveis()
+RETURNS TRIGGER AS $$
+BEGIN
+IF ((SELECT vagas FROM Treino WHERE id = NEW.idtreino) > 0)
+THEN
+   UPDATE Treino SET vagas = vagas - 1 WHERE id=NEW.idtreino;
+   RETURN NEW;
+END IF;
+RAISE EXCEPTION 'Vagas esgotadas!!';
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Atualiza_vagas_disponiveis
+BEFORE INSERT ON TreinoCorredor
+FOR EACH ROW
+EXECUTE PROCEDURE novas_Vagas_disponiveis();
+
