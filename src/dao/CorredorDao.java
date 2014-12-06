@@ -1,12 +1,10 @@
 package dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import modelo.Corredor;
 import conexao.Cryptography;
 import conexao.FabricaDeConexao;
@@ -79,22 +77,4 @@ public class CorredorDao {
 		}				
 		return false;
 	}
-	
-
-	/*public void altera(Corredor corredor) {
-		String sql = "update contatos set email=?, senha=?, peso=?, altura=?"
-				+ "where email=?";
-		try {
-			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, corredor.getEmail());
-			stmt.setString(2, corredor.getSenha());
-			stmt.setFloat(3, corredor.getPeso());
-			stmt.setFloat(4, corredor.getAltura());
-			stmt.setString(4, corredor.getEmail());
-			stmt.execute();
-			stmt.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}*/
 }

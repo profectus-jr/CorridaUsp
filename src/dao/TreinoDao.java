@@ -64,6 +64,28 @@ public class TreinoDao {
 			}
 		}
 		
+		public void altera(Treino treino) {
+			String sql = "update treino set descricao=?, situacao=?, vagas=?, numVagas=?, data_inicio=?, data_fim=?"
+				+ "where id=?";
+			try {
+				Statement stat1 = conexao.createStatement(); 
+				stat1.execute("set search_path to corridausp");
+				
+				PreparedStatement stmt = conexao.prepareStatement(sql);
+				stmt.setLong(7, treino.getId());
+				stmt.setString(1, treino.getDescricao());
+				stmt.setString(2, treino.getSituacao());
+				stmt.setInt(3, treino.getVagas());
+				stmt.setInt(4, treino.getVagas());
+				stmt.setDate(5, new java.sql.Date(treino.getDataInicio().getTime()));
+				stmt.setDate(6, new java.sql.Date(treino.getDataFim().getTime()));
+				stmt.execute();
+				stmt.close();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
 		public ArrayList<Treino> listaTreinosPorTreinador(Treinador treinador){
 			ArrayList<Treino> treinos = new ArrayList<Treino>();
 			try {

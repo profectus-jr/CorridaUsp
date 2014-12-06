@@ -13,32 +13,30 @@
 <h:body>
 	<p:outputLabel value="Editar treino" />
 	<h:form>
-		<h:panelGrid columns="1" rendered="#{treinoBean.treinos}" style="table-layout:fixed; font-size:12px; margin-top:35px;">
+		<h:panelGrid columns="1" style="table-layout:fixed; font-size:12px; margin-top:35px;">
+		
 			<p:outputLabel value="Descricao: " />
-			
-			<p:outputLabel value="#{treinoBean.treinos.descricao}" />
-			
-			<p:inputTextarea value="#{treinoBean.treino.descricao}" />
+			<p:inputTextarea value="#{treinoBean.treinos.descricao}"/>
 
-<!-- 			<p:outputLabel value="Situação: " /> -->
-<!-- 			<p:selectOneMenu id="situacao" value="#{treinoBean.treino.situacao}" -->
-<!-- 				style="width:150px"> -->
-<!-- 				<f:selectItem itemLabel="#{treinoBean.treino.situacao}" itemValue="" -->
-<!-- 					noSelectionOption="true" /> -->
-<!-- 				<f:selectItems value="#{treinoBean.situacoes}" /> -->
-<!-- 			</p:selectOneMenu> -->
+ 			<p:outputLabel value="Situação: " />
+ 			<p:selectOneMenu id="situacao" value="#{treinoBean.treinos.situacao}"
+ 				style="width:150px">
+ 				<f:selectItem itemLabel="#{treinoBean.treinos.situacao}" itemValue=""
+ 					noSelectionOption="true" />
+ 				<f:selectItems value="#{treinoBean.situacoes}" />
+ 			</p:selectOneMenu>
 
-<!-- 			<p:outputLabel value="Vagas: " /> -->
-<!-- 			<p:inputText rendered="#{treinoBean.treino.vagas}" value="#{treinoBean.treino.vagas}" /> -->
+ 			<p:outputLabel value="Vagas: " />
+ 			<p:inputText value="#{treinoBean.treinos.vagas}" />
 			
-<!-- 			<p:outputLabel value="Data de início: "/> -->
-<!--  			<p:calendar rendered="#{treinoBean.treino.dataInicio}" value="#{treinoBean.treino.dataInicio}"/> -->
+ 			<p:outputLabel value="Data de início: "/>
+  			<p:calendar value="#{treinoBean.treinos.dataInicio}"/>
  				
-<!--  			<p:outputLabel value="Data de fim: "/> -->
-<!--  			<p:calendar rendered="#{treinoBean.treino.dataFim}" value="#{treinoBean.treino.dataFim}"/> -->
+  			<p:outputLabel value="Data de fim: "/>
+  			<p:calendar value="#{treinoBean.treinos.dataFim}"/>
 
 			<p:commandButton value="Confirmar"
-				action="#{treinoBean.inscreveTreino}" />
+				action="#{treinoBean.atualizar}" />
 				
 			<p:commandButton value="Voltar"
 				action="#{treinadorBean.retornarAoMenuTreinador}" />

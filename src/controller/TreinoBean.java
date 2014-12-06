@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -15,9 +13,8 @@ import dao.TreinoDao;
 public class TreinoBean {
 
 	private Treino treino =  new Treino();
-	private List<Treino> treinos;
+	private Treino treinos = new Treino();
 	
-	//private String situacao;
 	private String situacoes[] = {"encerrado","inscricoes","ativo", "desativado"};
 
 	public Treino getTreino() {
@@ -26,6 +23,18 @@ public class TreinoBean {
 
 	public void setTreino(Treino treino) {
 		this.treino = treino;
+	}
+	
+	public Treino getTreinos() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		Treino treinos = (Treino) session.getAttribute("treino");
+		return treinos;
+	}
+
+	public void setTreinos(Treino treinos) {
+		this.treinos = treinos;
 	}
 	
 	public String inscreve() {
@@ -37,10 +46,7 @@ public class TreinoBean {
 		TreinoDao dao = new TreinoDao();
 		ExternalContext ec = fc.getExternalContext();
 		HttpSession session = (HttpSession) ec.getSession(false);
-		String sessionId = session.getId();
-		System.out.println("s id:" + sessionId);
 		Treinador treinador = (Treinador)session.getAttribute("treinador");
-		System.out.println("id treinador:" + treinador.getId());
 		this.treino.setIdTreinador(treinador.getId());
 		dao.adiciona(this.treino);
 		this.treino = new Treino();
@@ -58,16 +64,20 @@ public class TreinoBean {
 	}
 	
 	public String editar(Treino treino){
-		System.out.println(treino.getDescricao());
-		this.treinos.add(treino);
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		session.setAttribute("treino", treino);
 		return "/treino/editar?faces-redirect=true";
 	}
-
-	public List<Treino> getTreinos() {
-		return treinos;
-	}
-
-	public void setTreinos(List<Treino> treinos) {
-		this.treinos = treinos;
+	
+	public String atualizar(){
+		TreinoDao dao = new TreinoDao();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		treinos = (Treino)session.getAttribute("treino");
+		dao.altera(treinos);
+		return "/treinador/home?faces-redirect=true";
 	}
 }
