@@ -6,10 +6,11 @@ import java.sql.*;
 
 public class FabricaDeConexao {
 
-	public static final String NOME_DRIVER = "org.postgresql.Driver";
-	public static final String URL_BD = "jdbc:postgresql://localhost/bd_mac439_2014_grupo1";
-	public static final String USUARIO_BD = "pedro";
-	public static final String SENHA_BD = "pedro123";
+	public static final String NOME_DRIVER = "org.postgresql.Driver";	
+	public static final String URL_BD = "jdbc:postgresql://data.ime.usp.br:23001/bd_mac439_2014_grupo1";
+    public static final String USUARIO_BD = "usuario";
+    public static final String SENHA_BD = "senha";
+	
 
 	private static FabricaDeConexao fabricaDeConexao = null;
 
